@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="meta.title">GameBoxHeroes — Road Map 2026</title>
+<meta name="description" data-i18n-attr="content:meta.description" content="Les 24 prochaines étapes de GameBoxHeroes : nouveaux modules, sauvegarde des parties, classement des joueurs, aide au jeu solo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="roadmap.css">
+</head>
+<body class="page-roadmap">
+<!-- Fichier genere par tools/gen_roadmap.py : modifier les donnees la-bas, pas ce HTML -->
+<div class="page">
+  <div class="stage rm-top">
+
+    <div class="map" aria-hidden="true">
+      <img src="assets/map.png" alt="">
+    </div>
+
+    <header class="header">
+      <div class="brand">
+        <a class="brand__logo" href="index.html" data-i18n-attr="aria-label:rm.back" aria-label="Retour à l’accueil">
+          <img class="brand__logo-hex" src="assets/logo-hex.svg" alt="" width="139" height="156">
+          <img class="brand__logo-text" src="assets/logo-text.svg" alt="GameBoxHeroes" width="78" height="55">
+        </a>
+        <p class="brand__title" data-i18n="hero.title">Modules jouables de wargames classiques</p>
+      </div>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <div class="hero-photo" aria-hidden="true">
+      <img src="assets/hero-photo.png" alt="" width="600" height="465">
+    </div>
+
+    <section class="intro">
+      <h1 class="intro__headline" data-i18n-html="rm.headline">24 points<br>à venir en 2026</h1>
+      <div class="intro__news">
+        <p class="intro__label" data-i18n="rm.label">Road Map</p>
+        <p class="intro__text" data-i18n-html="rm.text">Nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!&nbsp;: voici ce que nous préparons, trimestre par trimestre.<br>Les dates sont indicatives et évolueront avec vos retours.</p>
+      </div>
+    </section>
+
+    <ul class="rm-stats" data-i18n-attr="aria-label:rm.stats" aria-label="Chiffres clés">
+      <li class="stat">
+        <span class="stat__value">24</span>
+        <span class="stat__label" data-i18n="stat.total">Points à venir d’ici fin 2026</span>
+      </li>
+      <li class="stat">
+        <span class="stat__value">7</span>
+        <span class="stat__label" data-i18n="stat.modules">Chantiers modules et missions</span>
+      </li>
+      <li class="stat">
+        <span class="stat__value">3</span>
+        <span class="stat__label" data-i18n="stat.progress">Déjà en cours de développement</span>
+      </li>
+    </ul>
+  </div>
+
+  <main class="rm-body">
+    <div class="rm-toolbar">
+      <span class="rule-line rule-line--main" aria-hidden="true"></span>
+      <span class="rule-line rule-line--side" aria-hidden="true"></span>
+      <div class="chips" role="group" data-i18n-attr="aria-label:rm.filters" aria-label="Filtrer par thème">
+        <button type="button" class="chip" data-filter="all" aria-pressed="true" data-i18n="rm.all">Tout</button>
+        <button type="button" class="chip" data-filter="modules" aria-pressed="false" data-i18n="cat.modules">Modules</button>
+        <button type="button" class="chip" data-filter="platform" aria-pressed="false" data-i18n="cat.platform">Plateforme</button>
+        <button type="button" class="chip" data-filter="community" aria-pressed="false" data-i18n="cat.community">Communauté</button>
+        <button type="button" class="chip" data-filter="solo" aria-pressed="false" data-i18n="cat.solo">Solo &amp; IA</button>
+      </div>
+      <p class="rm-count" aria-live="polite">24 points affichés</p>
+    </div>
+
+      <section class="quarter" aria-labelledby="q1">
+        <header class="quarter__head reveal">
+          <h2 class="quarter__code" id="q1" data-i18n="q1.code">T1</h2>
+          <p class="quarter__period" data-i18n="q1.period">Janvier – Mars 2026</p>
+        </header>
+        <ol class="items" start="1">
+          <li class="item reveal" data-cat="modules" style="--i:0">
+            <span class="item__num">01</span>
+            <h3 class="item__title" data-i18n-html="item1.title">Ambush! — missions 1 à 5</h3>
+            <p class="item__text" data-i18n-html="item1.text">Les cinq premières missions d’Ambush! jouables en solo, avec paragraphes, événements et tirages entièrement gérés par la plateforme.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.modules">Modules</span>
+              <span class="status status--progress" data-i18n="status.progress">En cours</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="platform" style="--i:1">
+            <span class="item__num">02</span>
+            <h3 class="item__title" data-i18n-html="item2.title">Mémorisation des parties</h3>
+            <p class="item__text" data-i18n-html="item2.text">Sauvegarde automatique à chaque action&nbsp;: reprenez une partie exactement où vous l’avez laissée, sur n’importe quel appareil.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--progress" data-i18n="status.progress">En cours</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="solo" style="--i:2">
+            <span class="item__num">03</span>
+            <h3 class="item__title" data-i18n-html="item3.title">Aide de jeu pour modules solo</h3>
+            <p class="item__text" data-i18n-html="item3.text">Un assistant de règles contextuel qui explique chaque étape, rappelle les tables à consulter et signale les oublis.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.solo">Solo &amp; IA</span>
+              <span class="status status--progress" data-i18n="status.progress">En cours</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="modules" style="--i:3">
+            <span class="item__num">04</span>
+            <h3 class="item__title" data-i18n-html="item4.title">A Bridge Too Far&nbsp;: Arnhem complet</h3>
+            <p class="item__text" data-i18n-html="item4.text">Tous les scénarios d’Arnhem 1976, du largage du 17 septembre au repli sur le Rhin.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.modules">Modules</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="platform" style="--i:4">
+            <span class="item__num">05</span>
+            <h3 class="item__title" data-i18n-html="item5.title">Historique et replay</h3>
+            <p class="item__text" data-i18n-html="item5.text">Rejouez une partie tour par tour pour revoir chaque décision, chaque tir et chaque résultat de dés.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="community" style="--i:5">
+            <span class="item__num">06</span>
+            <h3 class="item__title" data-i18n-html="item6.title">Profils joueurs</h3>
+            <p class="item__text" data-i18n-html="item6.text">Un profil public avec vos modules favoris, vos parties terminées et vos factions de prédilection.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.community">Communauté</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="quarter" aria-labelledby="q2">
+        <header class="quarter__head reveal">
+          <h2 class="quarter__code" id="q2" data-i18n="q2.code">T2</h2>
+          <p class="quarter__period" data-i18n="q2.period">Avril – Juin 2026</p>
+        </header>
+        <ol class="items" start="7">
+          <li class="item reveal" data-cat="community" style="--i:0">
+            <span class="item__num">07</span>
+            <h3 class="item__title" data-i18n-html="item7.title">Classement des joueurs</h3>
+            <p class="item__text" data-i18n-html="item7.text">Un classement Elo par module et un classement général, calculés uniquement sur les parties classées.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.community">Communauté</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="modules" style="--i:1">
+            <span class="item__num">08</span>
+            <h3 class="item__title" data-i18n-html="item8.title">Ambush! — nouvelles missions 6 à 11</h3>
+            <p class="item__text" data-i18n-html="item8.text">Six nouvelles missions en Normandie et dans le bocage, avec de nouveaux profils d’ennemis.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.modules">Modules</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="solo" style="--i:2">
+            <span class="item__num">09</span>
+            <h3 class="item__title" data-i18n-html="item9.title">Niveaux de difficulté de l’IA</h3>
+            <p class="item__text" data-i18n-html="item9.text">Trois réglages pour les moteurs d’IA solo&nbsp;: recrue, vétéran et élite.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.solo">Solo &amp; IA</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="solo" style="--i:3">
+            <span class="item__num">10</span>
+            <h3 class="item__title" data-i18n-html="item10.title">Tutoriel interactif</h3>
+            <p class="item__text" data-i18n-html="item10.text">Une première partie guidée pour apprendre les bases du wargame sans ouvrir le livret de règles.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.solo">Solo &amp; IA</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="platform" style="--i:4">
+            <span class="item__num">11</span>
+            <h3 class="item__title" data-i18n-html="item11.title">Parties asynchrones</h3>
+            <p class="item__text" data-i18n-html="item11.text">Jouez par correspondance à votre rythme, avec notification quand c’est votre tour.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="modules" style="--i:5">
+            <span class="item__num">12</span>
+            <h3 class="item__title" data-i18n-html="item12.title">Nouveau module&nbsp;: Normandie 1944</h3>
+            <p class="item__text" data-i18n-html="item12.text">Un module opérationnel consacré à la bataille de Normandie, de Caen à la poche de Falaise.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.modules">Modules</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="quarter" aria-labelledby="q3">
+        <header class="quarter__head reveal">
+          <h2 class="quarter__code" id="q3" data-i18n="q3.code">T3</h2>
+          <p class="quarter__period" data-i18n="q3.period">Juillet – Septembre 2026</p>
+        </header>
+        <ol class="items" start="13">
+          <li class="item reveal" data-cat="modules" style="--i:0">
+            <span class="item__num">13</span>
+            <h3 class="item__title" data-i18n-html="item13.title">Ambush!&nbsp;: campagne liée</h3>
+            <p class="item__text" data-i18n-html="item13.text">Enchaînez les missions avec la même escouade&nbsp;: expérience, blessures et promotions conservées.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.modules">Modules</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="community" style="--i:1">
+            <span class="item__num">14</span>
+            <h3 class="item__title" data-i18n-html="item14.title">Tournois et saisons</h3>
+            <p class="item__text" data-i18n-html="item14.text">Des saisons classées de trois mois et des tournois à élimination organisés sur la plateforme.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.community">Communauté</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="platform" style="--i:2">
+            <span class="item__num">15</span>
+            <h3 class="item__title" data-i18n-html="item15.title">Éditeur de scénarios</h3>
+            <p class="item__text" data-i18n-html="item15.text">Créez vos propres scénarios à partir des cartes et des pions existants, puis partagez-les.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="platform" style="--i:3">
+            <span class="item__num">16</span>
+            <h3 class="item__title" data-i18n-html="item16.title">Statistiques de partie</h3>
+            <p class="item__text" data-i18n-html="item16.text">Un bilan après chaque partie&nbsp;: pertes, moments clés, probabilités et comparaison avec la moyenne.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="community" style="--i:4">
+            <span class="item__num">17</span>
+            <h3 class="item__title" data-i18n-html="item17.title">Mode spectateur</h3>
+            <p class="item__text" data-i18n-html="item17.text">Suivez en direct les parties de tournoi et les rencontres entre joueurs classés.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.community">Communauté</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="modules" style="--i:5">
+            <span class="item__num">18</span>
+            <h3 class="item__title" data-i18n-html="item18.title">Nouveau module&nbsp;: front de l’Est</h3>
+            <p class="item__text" data-i18n-html="item18.text">Un module opérationnel sur le front de l’Est, pensé pour le jeu à deux comme contre l’IA.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.modules">Modules</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="quarter" aria-labelledby="q4">
+        <header class="quarter__head reveal">
+          <h2 class="quarter__code" id="q4" data-i18n="q4.code">T4</h2>
+          <p class="quarter__period" data-i18n="q4.period">Octobre – Décembre 2026</p>
+        </header>
+        <ol class="items" start="19">
+          <li class="item reveal" data-cat="platform" style="--i:0">
+            <span class="item__num">19</span>
+            <h3 class="item__title" data-i18n-html="item19.title">Version tablette et mobile</h3>
+            <p class="item__text" data-i18n-html="item19.text">Une interface pensée pour le tactile, avec zoom sur la carte et manipulation des pions au doigt.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="platform" style="--i:1">
+            <span class="item__num">20</span>
+            <h3 class="item__title" data-i18n-html="item20.title">Mode hors ligne</h3>
+            <p class="item__text" data-i18n-html="item20.text">Continuez vos parties solo sans connexion&nbsp;; la synchronisation se fait au retour du réseau.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="community" style="--i:2">
+            <span class="item__num">21</span>
+            <h3 class="item__title" data-i18n-html="item21.title">Succès et médailles</h3>
+            <p class="item__text" data-i18n-html="item21.text">Des décorations à gagner par module, inspirées des citations et médailles historiques.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.community">Communauté</span>
+              <span class="status status--planned" data-i18n="status.planned">Planifié</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="solo" style="--i:3">
+            <span class="item__num">22</span>
+            <h3 class="item__title" data-i18n-html="item22.title">IA adverse pour modules à deux joueurs</h3>
+            <p class="item__text" data-i18n-html="item22.text">Affrontez un adversaire artificiel dans les modules conçus à l’origine pour deux joueurs.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.solo">Solo &amp; IA</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="platform" style="--i:4">
+            <span class="item__num">23</span>
+            <h3 class="item__title" data-i18n-html="item23.title">Nouvelles langues</h3>
+            <p class="item__text" data-i18n-html="item23.text">Modules et interface traduits en allemand et en espagnol.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.platform">Plateforme</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+          <li class="item reveal" data-cat="modules" style="--i:5">
+            <span class="item__num">24</span>
+            <h3 class="item__title" data-i18n-html="item24.title">Nouveau module&nbsp;: guerre du Pacifique</h3>
+            <p class="item__text" data-i18n-html="item24.text">Un module consacré aux opérations amphibies et à la guerre dans les îles du Pacifique.</p>
+            <p class="item__meta">
+              <span class="tag" data-i18n="cat.modules">Modules</span>
+              <span class="status status--study" data-i18n="status.study">À l’étude</span>
+            </p>
+          </li>
+        </ol>
+      </section>
+
+    <footer class="rm-foot">
+      <span class="rule-line rule-line--main" aria-hidden="true"></span>
+      <span class="rule-line rule-line--side" aria-hidden="true"></span>
+      <a class="rm-back" href="index.html" data-i18n="rm.back">Retour à l’accueil</a>
+      <div class="rm-sign">
+        <p class="year">2026</p>
+        <a class="mark" href="index.html" aria-label="GameBoxHeroes">
+          <img src="assets/logo-mark.svg" alt="" width="65" height="73">
+        </a>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu__backdrop" data-close></div>
+  <nav class="menu__panel" data-i18n-attr="aria-label:menu.label" aria-label="Menu principal">
+    <button class="menu__close" type="button" data-close data-i18n-attr="aria-label:menu.close" aria-label="Fermer le menu">
+      <span></span><span></span>
+    </button>
+    <ul class="menu__links">
+      <li><a href="index.html#modules" data-i18n="menu.modules">Modules</a></li>
+      <li><a href="actualites.html" data-i18n="menu.news">Actualités</a></li>
+      <li><a href="roadmap.html" aria-current="page" data-close data-i18n="menu.roadmap">Road Map</a></li>
+      <li><a href="qui-sommes-nous.html" data-i18n="menu.about">Qui sommes-nous</a></li>
+      <li><a href="contact.html" data-i18n="menu.contact">Contact</a></li>
+    </ul>
+    <div class="lang" role="group" data-i18n-attr="aria-label:menu.language" aria-label="Langue">
+      <button type="button" class="lang__btn" data-lang="fr" lang="fr">FR</button>
+      <span class="lang__sep" aria-hidden="true">/</span>
+      <button type="button" class="lang__btn" data-lang="en" lang="en">EN</button>
+    </div>
+  </nav>
+</div>
+
+<script src="roadmap-i18n.js"></script>
+<script src="script.js"></script>
+<script src="roadmap.js"></script>
+</body>
+</html>

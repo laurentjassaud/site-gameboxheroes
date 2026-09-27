@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Page Road Map — s'appuie sur style.css (en-tete, carte, menu, animations).
+   Meme grille que l'accueil : colonne principale a 219 px, colonne laterale
+   a 1299 px, marge droite de 40 px sur une maquette de 1920 px.
+   ========================================================================== */
+
+/* ---------- Haut de page ---------- */
+
+.rm-top {
+  aspect-ratio: auto;
+  height: calc(788 * var(--u));
+}
+
+.rm-stats {
+  position: absolute;
+  left: calc(1299 * var(--u));
+  top: calc(318 * var(--u));
+  z-index: 2;
+  width: calc(581 * var(--u));
+  height: calc(392 * var(--u));
+  display: flex;
+  flex-direction: column;
+  gap: calc(16 * var(--u));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stat {
+  flex: 1;
+  display: grid;
+  grid-template-columns: calc(150 * var(--u)) 1fr;
+  gap: calc(8 * var(--u));
+  animation: slide-in 0.8s var(--ease-out) both;
+  animation-delay: 0.45s;
+}
+
+.stat:nth-child(2) { animation-delay: 0.55s; }
+.stat:nth-child(3) { animation-delay: 0.65s; }
+
+.stat__value,
+.stat__label {
+  display: flex;
+  align-items: center;
+  background: var(--white);
+  border-radius: 8px;
+}
+
+.stat__value {
+  justify-content: center;
+  font-size: calc(55 * var(--u));
+  line-height: calc(50 * var(--u));
+  font-weight: 700;
+  color: var(--red);
+}
+
+.stat__label {
+  padding: 0 calc(22 * var(--u));
+  font-size: calc(21 * var(--u));
+  line-height: calc(24 * var(--u));
+  font-weight: 600;
+}
+
+/* ---------- Corps ---------- */
+
+.rm-body {
+  --u: calc(100cqw / 1920);
+  --left: calc(219 * var(--u));
+  --right: calc(40 * var(--u));
+  padding-bottom: calc(56 * var(--u));
+}
+
+.rule-line {
+  position: absolute;
+  top: 0;
+  height: 4px;
+  background: var(--grey);
+  transform-origin: left center;
+}
+
+.rule-line--main { left: 0; width: calc(1033 * var(--u)); }
+.rule-line--side { left: calc(1080 * var(--u)); width: calc(581 * var(--u)); }
+
+.rm-toolbar .rule-line { animation: draw 0.9s var(--ease-in-out) 0.6s both; }
+.rm-toolbar .rule-line--side { animation-delay: 0.7s; }
+
+.rm-toolbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: calc(26 * var(--u)) var(--right) 0 var(--left);
+  padding-top: calc(4px + 36 * var(--u));
+  animation: fade-in 0.6s var(--ease-out) 0.7s both;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  height: max(38px, calc(46 * var(--u)));
+  padding: 0 max(14px, calc(22 * var(--u)));
+  border-radius: 2px;
+  background: var(--grey);
+  font-size: max(14px, calc(18 * var(--u)));
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.16s var(--ease-out);
+}
+
+.chip:active { transform: scale(0.97); }
+.chip[aria-pressed="true"] { background: var(--red); color: var(--white); }
+
+@media (hover: hover) and (pointer: fine) {
+  .chip[aria-pressed="false"]:hover { background: #e2e2e2; }
+}
+
+.rm-count {
+  flex: none;
+  font-size: max(14px, calc(18 * var(--u)));
+  font-weight: 300;
+}
+
+/* ---------- Trimestres ---------- */
+
+.quarter {
+  margin: calc(88 * var(--u)) var(--right) 0 var(--left);
+}
+
+.quarter[hidden] { display: none; }
+
+.quarter__head {
+  display: flex;
+  align-items: baseline;
+  gap: max(14px, calc(24 * var(--u)));
+  margin-bottom: max(24px, calc(40 * var(--u)));
+}
+
+.quarter__code {
+  font-size: max(38px, calc(55 * var(--u)));
+  line-height: 1;
+  font-weight: 700;
+  color: var(--red);
+}
+
+.quarter__period {
+  font-size: max(16px, calc(21 * var(--u)));
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: max(36px, calc(56 * var(--u))) max(24px, calc(47 * var(--u)));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Point de road map ---------- */
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-top: max(18px, calc(26 * var(--u)));
+}
+
+.item[hidden] { display: none; }
+
+/* Filet gris + filet rouge qui se trace au survol */
+.item::before,
+.item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--grey);
+}
+
+.item::after {
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.5s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item:hover::after { transform: scaleX(1); }
+}
+
+.js .item.reveal.is-in { transition-delay: calc(var(--i, 0) * 70ms); }
+
+/* Sortie lors du filtrage */
+.js .item.reveal.is-out {
+  opacity: 0;
+  transform: scale(0.98);
+  transition-delay: 0s;
+  transition-duration: 0.2s;
+}
+
+.item__num {
+  font-size: max(15px, calc(21 * var(--u)));
+  line-height: 1;
+  font-weight: 700;
+  color: var(--red);
+  font-variant-numeric: tabular-nums;
+}
+
+.item__title {
+  margin: max(10px, calc(14 * var(--u))) 0 max(8px, calc(12 * var(--u)));
+  font-size: max(19px, calc(26 * var(--u)));
+  line-height: 1.15;
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.item__text {
+  font-size: max(15px, calc(19 * var(--u)));
+  line-height: 1.42;
+  font-weight: 300;
+  text-wrap: pretty;
+}
+
+.item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: auto;
+  padding-top: max(14px, calc(20 * var(--u)));
+  font-size: max(12px, calc(15 * var(--u)));
+  font-weight: 500;
+}
+
+.tag {
+  padding: 3px 10px;
+  border-radius: 2px;
+  background: var(--grey);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--black);
+}
+
+.status--progress { color: var(--red); }
+.status--progress::before {
+  background: var(--red);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+.status--study { color: #6b6b6b; }
+.status--study::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px currentColor;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 7px rgba(255, 0, 0, 0); }
+}
+
+/* ---------- Pied de page ---------- */
+
+.rm-foot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: calc(104 * var(--u)) var(--right) 0 var(--left);
+  padding-top: calc(4px + 40 * var(--u));
+}
+
+.rm-back {
+  font-size: max(16px, calc(21 * var(--u)));
+  font-weight: 600;
+  background: linear-gradient(var(--red), var(--red)) left bottom / 0 2px no-repeat;
+  transition: background-size 0.35s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .rm-back:hover { background-size: 100% 2px; }
+}
+
+.rm-sign {
+  display: flex;
+  align-items: center;
+  gap: calc(20 * var(--u));
+}
+
+.rm-sign .year,
+.rm-sign .mark {
+  position: static;
+  animation: none;
+}
+
+.rm-sign .year { font-size: max(36px, calc(55 * var(--u))); line-height: 1; }
+.rm-sign .mark { width: max(46px, calc(65 * var(--u))); height: auto; aspect-ratio: 65 / 73; }
+
+/* ---------- Tablette ---------- */
+
+@media (max-width: 1280px) and (min-width: 901px) {
+  .items { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 900px) {
+  .rm-top { height: auto; padding-bottom: 0; }
+
+  .rm-stats {
+    position: relative;
+    order: 3;
+    left: auto;
+    top: auto;
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  .stat {
+    grid-template-columns: 1fr;
+    grid-template-rows: 64px auto;
+    gap: 6px;
+  }
+
+  .stat__value { font-size: 36px; line-height: 1; }
+  .stat__label {
+    align-items: flex-start;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 1.3;
+    box-shadow: 0 0 0 1px var(--grey);
+  }
+  .stat__value { box-shadow: 0 0 0 1px var(--grey); }
+
+  .rm-body { --left: 16px; --right: 16px; padding-bottom: 32px; }
+
+  .rule-line--main { width: 100%; }
+  .rule-line--side { display: none; }
+
+  .rm-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 32px;
+    padding-top: 28px;
+  }
+
+  .quarter { margin-top: 56px; }
+  .items { grid-template-columns: 1fr; }
+
+  .rm-foot { margin-top: 64px; padding-top: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status--progress::before { animation: none; }
+}

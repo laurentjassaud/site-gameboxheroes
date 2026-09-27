@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="meta.title">GameBoxHeroes — Contact</title>
+<meta name="description" data-i18n-attr="content:meta.description" content="Une question, une idée de module, un bug ? Écrivez à l’équipe GameBoxHeroes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="roadmap.css">
+<link rel="stylesheet" href="contact.css">
+</head>
+<body class="page-contact">
+<div class="page">
+  <div class="stage rm-top">
+
+    <div class="map" aria-hidden="true">
+      <img src="assets/map.png" alt="">
+    </div>
+
+    <header class="header">
+      <div class="brand">
+        <a class="brand__logo" href="index.html" data-i18n-attr="aria-label:rm.back" aria-label="Retour à l’accueil">
+          <img class="brand__logo-hex" src="assets/logo-hex.svg" alt="" width="139" height="156">
+          <img class="brand__logo-text" src="assets/logo-text.svg" alt="GameBoxHeroes" width="78" height="55">
+        </a>
+        <p class="brand__title" data-i18n="hero.title">Modules jouables de wargames classiques</p>
+      </div>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <div class="hero-photo" aria-hidden="true">
+      <img src="assets/hero-photo.png" alt="" width="600" height="465">
+    </div>
+
+    <section class="intro">
+      <h1 class="intro__headline" data-i18n-html="ct.headline">Parlons<br>wargame</h1>
+      <div class="intro__news">
+        <p class="intro__label" data-i18n="ct.label">Contact</p>
+        <p class="intro__text" data-i18n-html="ct.text">Une question sur un module, une idée de wargame classique à adapter, un bug à signaler&nbsp;?<br>Écrivez-nous&nbsp;: l’équipe lit chaque message et répond sous 48&nbsp;heures ouvrées.</p>
+      </div>
+    </section>
+
+    <!-- Raccourcis : pre-remplissent le sujet du formulaire -->
+    <ul class="rm-stats shortcuts" data-i18n-attr="aria-label:ct.shortcuts" aria-label="Raccourcis">
+      <li class="stat">
+        <a class="shortcut" href="#form" data-subject="module">
+          <span class="stat__value">01</span>
+          <span class="stat__label"><span data-i18n="subject.module">Proposer un module</span><img src="assets/arrow.svg" alt="" width="30" height="31"></span>
+        </a>
+      </li>
+      <li class="stat">
+        <a class="shortcut" href="#form" data-subject="bug">
+          <span class="stat__value">02</span>
+          <span class="stat__label"><span data-i18n="subject.bug">Signaler un bug</span><img src="assets/arrow.svg" alt="" width="30" height="31"></span>
+        </a>
+      </li>
+      <li class="stat">
+        <a class="shortcut" href="#form" data-subject="press">
+          <span class="stat__value">03</span>
+          <span class="stat__label"><span data-i18n="subject.press">Presse &amp; partenariats</span><img src="assets/arrow.svg" alt="" width="30" height="31"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <main class="ct-body" id="form">
+    <span class="rule-line rule-line--main" aria-hidden="true"></span>
+    <span class="rule-line rule-line--side" aria-hidden="true"></span>
+
+    <div class="ct-form-wrap">
+      <form class="ct-form" action="contact.php" method="post">
+        <h2 class="ct-title" data-i18n="ct.formTitle">Écrivez-nous</h2>
+
+        <div class="form-status" role="alert" hidden></div>
+
+        <div class="field-row">
+          <div class="field" data-field="name">
+            <label for="f-name" data-i18n="field.name">Nom</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="100" aria-describedby="e-name">
+            <p class="field__error" id="e-name"></p>
+          </div>
+          <div class="field" data-field="email">
+            <label for="f-email" data-i18n="field.email">E-mail</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" spellcheck="false" aria-describedby="e-email">
+            <p class="field__error" id="e-email"></p>
+          </div>
+        </div>
+
+        <div class="field" data-field="subject">
+          <label for="f-subject" data-i18n="field.subject">Sujet</label>
+          <div class="select">
+            <select id="f-subject" name="subject" required aria-describedby="e-subject">
+              <option value="general" data-i18n="subject.general">Question générale</option>
+              <option value="module" data-i18n="subject.module">Proposer un module</option>
+              <option value="bug" data-i18n="subject.bug">Signaler un bug</option>
+              <option value="press" data-i18n="subject.press">Presse &amp; partenariats</option>
+            </select>
+          </div>
+          <p class="field__error" id="e-subject"></p>
+        </div>
+
+        <div class="field" data-field="message">
+          <div class="field__top">
+            <label for="f-message" data-i18n="field.message">Message</label>
+            <span class="field__count" aria-hidden="true">0 / 5000</span>
+          </div>
+          <textarea id="f-message" name="message" rows="8" required minlength="10" maxlength="5000" aria-describedby="e-message"></textarea>
+          <p class="field__error" id="e-message"></p>
+        </div>
+
+        <div class="field field--check" data-field="consent">
+          <input id="f-consent" name="consent" type="checkbox" value="1" required aria-describedby="e-consent">
+          <label for="f-consent" data-i18n="field.consent">J’accepte que mes informations soient utilisées uniquement pour répondre à ma demande.</label>
+          <p class="field__error" id="e-consent"></p>
+        </div>
+
+        <!-- Pot de miel anti-robots : laisse vide par les humains -->
+        <div class="hp" aria-hidden="true">
+          <label for="f-website">Website</label>
+          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="t" value="">
+        <input type="hidden" name="lang" value="fr">
+
+        <button class="submit" type="submit">
+          <span class="submit__label" data-i18n="form.submit">Envoyer le message</span>
+          <img class="submit__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
+          <span class="submit__spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <div class="ct-success" tabindex="-1" hidden>
+        <p class="ct-success__label" data-i18n="success.label">Message envoyé</p>
+        <h2 class="ct-success__title" data-i18n-html="success.title">Merci,<br>c’est bien reçu&nbsp;!</h2>
+        <p class="ct-success__text" data-i18n="success.text">Nous vous répondons sous 48 heures ouvrées à l’adresse indiquée.</p>
+        <button class="ct-again" type="button" data-i18n="success.again">Envoyer un autre message</button>
+      </div>
+    </div>
+
+    <aside class="ct-aside">
+      <div class="info">
+        <p class="info__label" data-i18n="info.delay.label">Délai de réponse</p>
+        <p class="info__text" data-i18n="info.delay.text">48 heures ouvrées en moyenne, souvent moins.</p>
+      </div>
+      <div class="info">
+        <p class="info__label" data-i18n="info.lang.label">Langues</p>
+        <p class="info__text" data-i18n="info.lang.text">Nous répondons en français et en anglais.</p>
+      </div>
+      <div class="info">
+        <p class="info__label" data-i18n="info.bug.label">Pour un bug</p>
+        <p class="info__text" data-i18n="info.bug.text">Précisez le module, le scénario et le tour concernés&nbsp;: nous retrouverons la partie plus vite.</p>
+      </div>
+      <div class="info">
+        <p class="info__label" data-i18n="info.privacy.label">Vos données</p>
+        <p class="info__text" data-i18n="info.privacy.text">Votre nom et votre e-mail servent uniquement à vous répondre. Ils ne sont ni stockés sur le site ni transmis à des tiers.</p>
+      </div>
+    </aside>
+
+    <footer class="rm-foot">
+      <span class="rule-line rule-line--main" aria-hidden="true"></span>
+      <span class="rule-line rule-line--side" aria-hidden="true"></span>
+      <a class="rm-back" href="index.html" data-i18n="rm.back">Retour à l’accueil</a>
+      <div class="rm-sign">
+        <p class="year">2026</p>
+        <a class="mark" href="index.html" aria-label="GameBoxHeroes">
+          <img src="assets/logo-mark.svg" alt="" width="65" height="73">
+        </a>
+      </div>
+    </footer>
+  </main>
+</div>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu__backdrop" data-close></div>
+  <nav class="menu__panel" data-i18n-attr="aria-label:menu.label" aria-label="Menu principal">
+    <button class="menu__close" type="button" data-close data-i18n-attr="aria-label:menu.close" aria-label="Fermer le menu">
+      <span></span><span></span>
+    </button>
+    <ul class="menu__links">
+      <li><a href="index.html#modules" data-i18n="menu.modules">Modules</a></li>
+      <li><a href="actualites.html" data-i18n="menu.news">Actualités</a></li>
+      <li><a href="roadmap.html" data-i18n="menu.roadmap">Road Map</a></li>
+      <li><a href="qui-sommes-nous.html" data-i18n="menu.about">Qui sommes-nous</a></li>
+      <li><a href="contact.html" aria-current="page" data-close data-i18n="menu.contact">Contact</a></li>
+    </ul>
+    <div class="lang" role="group" data-i18n-attr="aria-label:menu.language" aria-label="Langue">
+      <button type="button" class="lang__btn" data-lang="fr" lang="fr">FR</button>
+      <span class="lang__sep" aria-hidden="true">/</span>
+      <button type="button" class="lang__btn" data-lang="en" lang="en">EN</button>
+    </div>
+  </nav>
+</div>
+
+<script src="contact-i18n.js"></script>
+<script src="script.js"></script>
+<script src="contact.js"></script>
+</body>
+</html>
