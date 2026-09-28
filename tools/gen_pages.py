@@ -1,11 +1,7 @@
 # Genere actualites.html et qui-sommes-nous.html (+ leurs fichiers de traduction)
-# a partir des donnees ci-dessous.
+# a partir des donnees ci-dessous, avec le gabarit commun tools/layout.py.
 # Usage : python tools/gen_pages.py (depuis n importe quel dossier)
-import html
-import json
-import os
-
-OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from layout import Page, topbar, intro, render, CREDIT
 
 MONTHS_FR = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet',
              'août', 'septembre', 'octobre', 'novembre', 'décembre']
@@ -146,148 +142,6 @@ TIMELINE = [
 #  Outils communs
 # ===========================================================================
 
-class Page:
-    """Accumule les textes FR / EN d'une page et produit le HTML correspondant."""
-
-    def __init__(self):
-        self.fr, self.en = {}, {}
-
-    def k(self, key, fr, en):
-        self.fr[key], self.en[key] = fr, en
-        return key
-
-    def t(self, key, fr, en, tag='p', cls='', attrs=''):
-        """Element traduisible : le HTML statique contient le francais."""
-        self.k(key, fr, en)
-        c = f' class="{cls}"' if cls else ''
-        a = f' {attrs}' if attrs else ''
-        return f'<{tag}{c}{a} data-i18n-html="{key}">{fr}</{tag}>'
-
-
-def chrome(p, *, file, meta_title, meta_desc, intro, right, body, css, scripts, current):
-    p.k('meta.title', *meta_title)
-    p.k('meta.description', *meta_desc)
-    p.k('hero.title', 'Modules jouables de wargames classiques', 'Playable modules of classic wargames')
-    p.k('rm.back', 'Retour à l’accueil', 'Back to home')
-
-    def menu_link(href, key, label):
-        cur = ' aria-current="page" data-close' if href == current else ''
-        return f'      <li><a href="{href}"{cur} data-i18n="{key}">{label}</a></li>'
-
-    links = '\n'.join([
-        menu_link('index.html#modules', 'menu.modules', 'Modules'),
-        menu_link('actualites.html', 'menu.news', 'Actualités'),
-        menu_link('roadmap.html', 'menu.roadmap', 'Road Map'),
-        menu_link('qui-sommes-nous.html', 'menu.about', 'Qui sommes-nous'),
-        menu_link('contact.html', 'menu.contact', 'Contact'),
-    ])
-    css_links = '\n'.join(f'<link rel="stylesheet" href="{c}">' for c in css)
-    js_tags = '\n'.join(f'<script src="{j}"></script>' for j in scripts)
-
-    return f'''<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title data-i18n="meta.title">{meta_title[0]}</title>
-<meta name="description" data-i18n-attr="content:meta.description" content="{html.escape(meta_desc[0])}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-{css_links}
-</head>
-<body>
-<!-- Fichier genere par tools/gen_pages.py : modifier les donnees la-bas, pas ce HTML -->
-<div class="page">
-  <div class="stage rm-top">
-
-    <div class="map" aria-hidden="true">
-      <img src="assets/map.png" alt="">
-    </div>
-
-    <header class="header">
-      <div class="brand">
-        <a class="brand__logo" href="index.html" data-i18n-attr="aria-label:rm.back" aria-label="Retour à l’accueil">
-          <img class="brand__logo-hex" src="assets/logo-hex.svg" alt="" width="139" height="156">
-          <img class="brand__logo-text" src="assets/logo-text.svg" alt="GameBoxHeroes" width="78" height="55">
-        </a>
-        <p class="brand__title" data-i18n="hero.title">Modules jouables de wargames classiques</p>
-      </div>
-      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-    </header>
-
-    <div class="hero-photo" aria-hidden="true">
-      <img src="assets/hero-photo.png" alt="" width="600" height="465">
-    </div>
-
-{intro}
-
-{right}
-  </div>
-
-  <main class="rm-body">
-{body}
-
-    <footer class="rm-foot">
-      <span class="rule-line rule-line--main" aria-hidden="true"></span>
-      <span class="rule-line rule-line--side" aria-hidden="true"></span>
-      <a class="rm-back" href="index.html" data-i18n="rm.back">Retour à l’accueil</a>
-      <div class="rm-sign">
-        <p class="year">2026</p>
-        <a class="mark" href="index.html" aria-label="GameBoxHeroes">
-          <img src="assets/logo-mark.svg" alt="" width="65" height="73">
-        </a>
-      </div>
-    </footer>
-  </main>
-</div>
-
-<div class="menu" id="menu" hidden>
-  <div class="menu__backdrop" data-close></div>
-  <nav class="menu__panel" data-i18n-attr="aria-label:menu.label" aria-label="Menu principal">
-    <button class="menu__close" type="button" data-close data-i18n-attr="aria-label:menu.close" aria-label="Fermer le menu">
-      <span></span><span></span>
-    </button>
-    <ul class="menu__links">
-{links}
-    </ul>
-    <div class="lang" role="group" data-i18n-attr="aria-label:menu.language" aria-label="Langue">
-      <button type="button" class="lang__btn" data-lang="fr" lang="fr">FR</button>
-      <span class="lang__sep" aria-hidden="true">/</span>
-      <button type="button" class="lang__btn" data-lang="en" lang="en">EN</button>
-    </div>
-  </nav>
-</div>
-
-<script src="{file.replace('.html', '-i18n.js')}"></script>
-<script src="script.js"></script>
-{js_tags}
-</body>
-</html>
-'''
-
-
-def intro_block(p, headline, label, text):
-    return f'''    <section class="intro">
-      {p.t('pg.headline', *headline, tag='h1', cls='intro__headline')}
-      <div class="intro__news">
-        {p.t('pg.label', *label, cls='intro__label')}
-        {p.t('pg.text', *text, cls='intro__text')}
-      </div>
-    </section>'''
-
-
-def write(file, page_html, p):
-    with open(os.path.join(OUT, file), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(page_html)
-    i18n = file.replace('.html', '-i18n.js')
-    with open(os.path.join(OUT, i18n), 'w', encoding='utf-8', newline='\n') as f:
-        f.write(f'// Fichier genere par tools/gen_pages.py : textes FR / EN de {file}.\n')
-        f.write('window.GBH_I18N = ' + json.dumps({'fr': p.fr, 'en': p.en}, ensure_ascii=False, indent=2) + ';\n')
-
-
 # ===========================================================================
 #  Page Actualites
 # ===========================================================================
@@ -302,38 +156,12 @@ def build_news():
     p.k('news.count.one', '{n} article', '{n} article')
     p.k('news.count.other', '{n} articles', '{n} articles')
     p.k('news.filters', 'Filtrer par thème', 'Filter by theme')
-    p.k('news.featured', 'À la une', 'Featured')
 
-    intro = intro_block(
-        p,
-        ('Le journal<br>du projet', 'The<br>project log'),
-        ('Actualités', 'News'),
-        ('Sorties de modules, tests publics, nouveautés de la plateforme&nbsp;: toutes les nouvelles du projet, de la plus récente à la plus ancienne.',
-         'Module releases, public tests, platform updates: all the project news, newest first.'))
-
-    # Colonne de droite : les deux modules a la une (memes cartes que l'accueil)
-    right = f'''    <section class="modules" data-i18n-attr="aria-label:news.featured" aria-label="À la une">
-      <a class="module" href="#arnhem-tests-publics" data-open>
-        <div class="module__cover module__cover--center">
-          <img src="assets/cover-arnhem.jpg" alt="Arnhem: Operation Market-Garden" width="210" height="266">
-        </div>
-        <div class="module__card">
-          <h2 class="module__title">A Bridge Too Far: Arnhem (1976)</h2>
-          {p.t('feat.arnhem', 'Tests publics ouverts à tous les joueurs&nbsp;: scénario principal et mode assisté.', 'Public testing open to all players: main scenario and assisted mode.', cls='module__desc')}
-          <img class="module__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
-        </div>
-      </a>
-      <a class="module" href="#ambush-missions" data-open>
-        <div class="module__cover module__cover--top">
-          <img src="assets/cover-ambush.jpg" alt="Ambush!" width="150" height="206">
-        </div>
-        <div class="module__card">
-          <h2 class="module__title">Ambush! (1983)</h2>
-          {p.t('feat.ambush', 'Les missions 1 à 5 sont en préparation.', 'Missions 1 to 5 are in the works.', cls='module__desc module__desc--low')}
-          <img class="module__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
-        </div>
-      </a>
-    </section>'''
+    top = f"""{topbar()}
+{intro(p, ('Actualités', 'News'),
+       ('Sorties de modules, tests publics, nouveautés de la plateforme&nbsp;:<br>toutes les nouvelles du projet, de la plus récente à la plus ancienne.',
+        'Module releases, public tests, platform updates:<br>all the project news, newest first.'))}
+    {CREDIT}"""
 
     chips = ['        <button type="button" class="chip" data-filter="all" aria-pressed="true" data-i18n="news.all">Tout</button>']
     for c, (f, _) in NEWS_CATS.items():
@@ -361,7 +189,8 @@ def build_news():
         </div>
       </article>''')
 
-    body = f'''    <div class="rm-toolbar">
+    body = f'''  <div class="wrap page-body">
+    <div class="rm-toolbar">
       <span class="rule-line rule-line--main" aria-hidden="true"></span>
       <span class="rule-line rule-line--side" aria-hidden="true"></span>
       <div class="chips" role="group" data-i18n-attr="aria-label:news.filters" aria-label="Filtrer par thème">
@@ -372,16 +201,15 @@ def build_news():
 
     <div class="articles">
 {chr(10).join(articles)}
-    </div>'''
+    </div>
+  </div>'''
 
-    page = chrome(p, file='actualites.html',
-                  meta_title=('GameBoxHeroes — Actualités', 'GameBoxHeroes — News'),
-                  meta_desc=('Toutes les nouvelles de GameBoxHeroes : modules, tests publics et nouveautés de la plateforme.',
-                             'All the GameBoxHeroes news: modules, public tests and platform updates.'),
-                  intro=intro, right=right, body=body,
-                  css=['style.css', 'roadmap.css', 'pages.css'], scripts=['news.js'],
-                  current='actualites.html')
-    write('actualites.html', page, p)
+    render(p, file='actualites.html',
+           meta_title=('GameBoxHeroes — Actualités', 'GameBoxHeroes — News'),
+           meta_desc=('Toutes les nouvelles de GameBoxHeroes : modules, tests publics et nouveautés de la plateforme.',
+                      'All the GameBoxHeroes news: modules, public tests and platform updates.'),
+           top=top, body=body, css=['roadmap.css', 'pages.css'], scripts=['news.js'],
+           body_class='page-news', generator='tools/gen_pages.py')
 
 
 # ===========================================================================
@@ -391,27 +219,26 @@ def build_news():
 def build_about():
     p = Page()
 
-    intro = intro_block(
-        p,
-        ('Des joueurs<br>au service du jeu', 'Players<br>serving the game'),
-        ('Qui sommes-nous', 'About us'),
-        ('GameBoxHeroes est né d’une envie simple&nbsp;: rejouer les grands classiques du wargame sans passer des heures à préparer la table, et partager ces parties avec d’autres passionnés.',
-         'GameBoxHeroes started from a simple wish: to replay the great wargame classics without spending hours setting up the table, and to share those games with fellow enthusiasts.'))
+    top = f"""{topbar()}
+{intro(p, ('Qui sommes-nous', 'About us'),
+       ('GameBoxHeroes est né d’une envie simple&nbsp;: rejouer les grands classiques du wargame sans passer des heures à préparer la table, et partager ces parties avec d’autres passionnés.',
+        'GameBoxHeroes started from a simple wish: to replay the great wargame classics without spending hours setting up the table, and to share those games with fellow enthusiasts.'))}
+    {CREDIT}"""
 
     stats = [
         ('2', ('Modules en développement', 'Modules in development')),
         ('24', ('Points à la road map 2026', 'Milestones on the 2026 road map')),
         ('2', ('Langues&nbsp;: français et anglais', 'Languages: French and English')),
     ]
-    right = '    <ul class="rm-stats" data-i18n-attr="aria-label:about.figures" aria-label="Chiffres clés">\n'
+    stats_html = '    <ul class="rm-stats" data-i18n-attr="aria-label:about.figures" aria-label="Chiffres clés">\n'
     p.k('about.figures', 'Chiffres clés', 'Key figures')
     for i, (val, label) in enumerate(stats, 1):
-        right += f'''      <li class="stat">
+        stats_html += f'''      <li class="stat">
         <span class="stat__value">{val}</span>
         {p.t(f'stat{i}', *label, tag='span', cls='stat__label')}
       </li>
 '''
-    right += '    </ul>'
+    stats_html += '    </ul>'
 
     pillars = '\n'.join(f'''        <li class="pillar reveal" style="--i:{i - 1}">
           <img class="pillar__hex" src="assets/hex-bullet.svg" alt="" width="31" height="34">
@@ -432,7 +259,10 @@ def build_about():
           {p.t(f'step{i}.text', *text, cls='step__text')}
         </li>''' for i, (when, title, text) in enumerate(TIMELINE, 1))
 
-    body = f'''    <section class="block block--split">
+    body = f'''  <div class="wrap page-body">
+{stats_html}
+
+    <section class="block block--split">
       <span class="rule-line rule-line--main" aria-hidden="true"></span>
       <span class="rule-line rule-line--side" aria-hidden="true"></span>
       <div class="block__main reveal">
@@ -476,18 +306,17 @@ def build_about():
         <a class="btn btn--red" href="contact.html"><span data-i18n="cta.contact">Nous écrire</span><img src="assets/arrow.svg" alt="" width="30" height="31"></a>
         <a class="btn" href="roadmap.html" data-i18n="cta.roadmap">Voir la road map</a>
       </div>
-    </section>'''
+    </section>
+  </div>'''
     p.k('cta.contact', 'Nous écrire', 'Write to us')
     p.k('cta.roadmap', 'Voir la road map', 'See the road map')
 
-    page = chrome(p, file='qui-sommes-nous.html',
-                  meta_title=('GameBoxHeroes — Qui sommes-nous', 'GameBoxHeroes — About us'),
-                  meta_desc=('GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs. Notre mission, nos principes, notre équipe.',
-                             'GameBoxHeroes adapts classic wargames to play solo or live with others. Our mission, principles and team.'),
-                  intro=intro, right=right, body=body,
-                  css=['style.css', 'roadmap.css', 'pages.css'], scripts=[],
-                  current='qui-sommes-nous.html')
-    write('qui-sommes-nous.html', page, p)
+    render(p, file='qui-sommes-nous.html',
+           meta_title=('GameBoxHeroes — Qui sommes-nous', 'GameBoxHeroes — About us'),
+           meta_desc=('GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs. Notre mission, nos principes, notre équipe.',
+                      'GameBoxHeroes adapts classic wargames to play solo or live with others. Our mission, principles and team.'),
+           top=top, body=body, css=['roadmap.css', 'pages.css'],
+           body_class='page-about', generator='tools/gen_pages.py')
 
 
 build_news()

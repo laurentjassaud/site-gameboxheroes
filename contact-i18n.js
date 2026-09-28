@@ -3,12 +3,9 @@ window.GBH_I18N = {
   fr: {
     'meta.title': 'GameBoxHeroes — Contact',
     'meta.description': 'Une question, une idée de module, un bug ? Écrivez à l’équipe GameBoxHeroes.',
-    'hero.title': 'Modules jouables de wargames classiques',
-    'rm.back': 'Retour à l’accueil',
 
-    'ct.headline': 'Parlons<br>wargame',
-    'ct.label': 'Contact',
-    'ct.text': 'Une question sur un module, une idée de wargame classique à adapter, un bug à signaler&nbsp;?<br>Écrivez-nous&nbsp;: l’équipe lit chaque message et répond sous 48&nbsp;heures ouvrées.',
+    'pg.title': 'Contact',
+    'pg.sub': 'Parlons wargames&nbsp;:<br>une idée, une question, un jeu original à adapter',
     'ct.shortcuts': 'Raccourcis',
     'ct.formTitle': 'Écrivez-nous',
 
@@ -58,12 +55,9 @@ window.GBH_I18N = {
   en: {
     'meta.title': 'GameBoxHeroes — Contact',
     'meta.description': 'A question, a module idea, a bug? Write to the GameBoxHeroes team.',
-    'hero.title': 'Playable modules of classic wargames',
-    'rm.back': 'Back to home',
 
-    'ct.headline': 'Let’s talk<br>wargames',
-    'ct.label': 'Contact',
-    'ct.text': 'A question about a module, a classic wargame you’d like adapted, a bug to report?<br>Write to us: the team reads every message and replies within 2 business days.',
+    'pg.title': 'Contact',
+    'pg.sub': 'Let’s talk wargames:<br>an idea, a question, a classic game to adapt',
     'ct.shortcuts': 'Shortcuts',
     'ct.formTitle': 'Write to us',
 

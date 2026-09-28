@@ -1,8 +1,8 @@
 # Genere roadmap.html + roadmap-i18n.js a partir d une seule source de donnees.
 # Usage : python tools/gen_roadmap.py (depuis n importe quel dossier)
-import json, html, os
+import html
+from layout import Page, topbar, intro, render, CREDIT
 
-OUT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 CATS = {
     "modules":   ("Modules", "Modules"),
@@ -161,18 +161,15 @@ def key(k, f, e):
 key("meta.title", "GameBoxHeroes — Road Map 2026", "GameBoxHeroes — 2026 Road Map")
 key("meta.description", "Les 24 prochaines étapes de GameBoxHeroes&nbsp;: nouveaux modules, sauvegarde des parties, classement des joueurs, aide au jeu solo.".replace("&nbsp;", "\u00a0"),
     "GameBoxHeroes’ next 24 milestones: new modules, game saving, player rankings, solo play aids.")
-key("hero.title", "Modules jouables de wargames classiques", "Playable modules of classic wargames")
-key("rm.headline", "24 points<br>à venir en 2026", "24 milestones<br>coming in 2026")
 key("rm.label", "Road Map", "Road Map")
 key("rm.text",
-    "Nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!&nbsp;: voici ce que nous préparons, trimestre par trimestre.<br>Les dates sont indicatives et évolueront avec vos retours.",
-    "New modules, game saving, player rankings, solo play aids, new Ambush! missions: here is what we are building, quarter by quarter.<br>Dates are indicative and will evolve with your feedback.")
+    "24 points à venir en 2026&nbsp;: nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!<br>Les dates sont indicatives et évolueront avec vos retours.",
+    "24 milestones coming in 2026: new modules, game saving, player rankings, solo play aids, new Ambush! missions.<br>Dates are indicative and will evolve with your feedback.")
 key("rm.stats", "Chiffres clés", "Key figures")
 key("rm.filters", "Filtrer par thème", "Filter by theme")
 key("rm.all", "Tout", "All")
 key("rm.count.one", "{n} point affiché", "{n} milestone shown")
 key("rm.count.other", "{n} points affichés", "{n} milestones shown")
-key("rm.back", "Retour à l’accueil", "Back to home")
 
 n_modules = sum(1 for i in ITEMS if i[1] == "modules")
 n_progress = sum(1 for i in ITEMS if i[2] == "progress")
@@ -240,59 +237,18 @@ def quarters_html():
       </section>''')
     return "\n\n".join(out)
 
-page = f'''<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title data-i18n="meta.title">{fr["meta.title"]}</title>
-<meta name="description" data-i18n-attr="content:meta.description" content="{html.escape(fr["meta.description"])}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="roadmap.css">
-</head>
-<body class="page-roadmap">
-<!-- Fichier genere par tools/gen_roadmap.py : modifier les donnees la-bas, pas ce HTML -->
-<div class="page">
-  <div class="stage rm-top">
+p = Page()
+p.fr, p.en = fr, en
 
-    <div class="map" aria-hidden="true">
-      <img src="assets/map.png" alt="">
-    </div>
+top = f"""{topbar()}
+{intro(p, ('Road Map', 'Road Map'), (fr['rm.text'], en['rm.text']))}
+    {CREDIT}"""
 
-    <header class="header">
-      <div class="brand">
-        <a class="brand__logo" href="index.html" data-i18n-attr="aria-label:rm.back" aria-label="Retour à l’accueil">
-          <img class="brand__logo-hex" src="assets/logo-hex.svg" alt="" width="139" height="156">
-          <img class="brand__logo-text" src="assets/logo-text.svg" alt="GameBoxHeroes" width="78" height="55">
-        </a>
-        <p class="brand__title" data-i18n="hero.title">{fr["hero.title"]}</p>
-      </div>
-      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-    </header>
-
-    <div class="hero-photo" aria-hidden="true">
-      <img src="assets/hero-photo.png" alt="" width="600" height="465">
-    </div>
-
-    <section class="intro">
-      <h1 class="intro__headline" data-i18n-html="rm.headline">{fr["rm.headline"]}</h1>
-      <div class="intro__news">
-        <p class="intro__label" data-i18n="rm.label">Road Map</p>
-        <p class="intro__text" data-i18n-html="rm.text">{fr["rm.text"]}</p>
-      </div>
-    </section>
-
+body = f"""  <div class="wrap page-body">
     <ul class="rm-stats" data-i18n-attr="aria-label:rm.stats" aria-label="Chiffres clés">
 {stat_html()}
     </ul>
-  </div>
 
-  <main class="rm-body">
     <div class="rm-toolbar">
       <span class="rule-line rule-line--main" aria-hidden="true"></span>
       <span class="rule-line rule-line--side" aria-hidden="true"></span>
@@ -303,55 +259,10 @@ page = f'''<!doctype html>
     </div>
 
 {quarters_html()}
+  </div>"""
 
-    <footer class="rm-foot">
-      <span class="rule-line rule-line--main" aria-hidden="true"></span>
-      <span class="rule-line rule-line--side" aria-hidden="true"></span>
-      <a class="rm-back" href="index.html" data-i18n="rm.back">Retour à l’accueil</a>
-      <div class="rm-sign">
-        <p class="year">2026</p>
-        <a class="mark" href="index.html" aria-label="GameBoxHeroes">
-          <img src="assets/logo-mark.svg" alt="" width="65" height="73">
-        </a>
-      </div>
-    </footer>
-  </main>
-</div>
-
-<div class="menu" id="menu" hidden>
-  <div class="menu__backdrop" data-close></div>
-  <nav class="menu__panel" data-i18n-attr="aria-label:menu.label" aria-label="Menu principal">
-    <button class="menu__close" type="button" data-close data-i18n-attr="aria-label:menu.close" aria-label="Fermer le menu">
-      <span></span><span></span>
-    </button>
-    <ul class="menu__links">
-      <li><a href="index.html#modules" data-i18n="menu.modules">Modules</a></li>
-      <li><a href="actualites.html" data-i18n="menu.news">Actualités</a></li>
-      <li><a href="roadmap.html" aria-current="page" data-close data-i18n="menu.roadmap">Road Map</a></li>
-      <li><a href="qui-sommes-nous.html" data-i18n="menu.about">Qui sommes-nous</a></li>
-      <li><a href="contact.html" data-i18n="menu.contact">Contact</a></li>
-    </ul>
-    <div class="lang" role="group" data-i18n-attr="aria-label:menu.language" aria-label="Langue">
-      <button type="button" class="lang__btn" data-lang="fr" lang="fr">FR</button>
-      <span class="lang__sep" aria-hidden="true">/</span>
-      <button type="button" class="lang__btn" data-lang="en" lang="en">EN</button>
-    </div>
-  </nav>
-</div>
-
-<script src="roadmap-i18n.js"></script>
-<script src="script.js"></script>
-<script src="roadmap.js"></script>
-</body>
-</html>
-'''
-
-with open(os.path.join(OUT, "roadmap.html"), "w", encoding="utf-8", newline="\n") as f:
-    f.write(page)
-
-js = ("// Fichier genere : textes FR / EN de la page Road Map.\n"
-      "window.GBH_I18N = " + json.dumps({"fr": fr, "en": en}, ensure_ascii=False, indent=2) + ";\n")
-with open(os.path.join(OUT, "roadmap-i18n.js"), "w", encoding="utf-8", newline="\n") as f:
-    f.write(js)
-
+render(p, file='roadmap.html', meta_title=(fr['meta.title'], en['meta.title']),
+       meta_desc=(fr['meta.description'], en['meta.description']),
+       top=top, body=body, css=['roadmap.css'], scripts=['roadmap.js'],
+       body_class='page-roadmap', generator='tools/gen_roadmap.py')
 print("ok", n_modules, n_progress)

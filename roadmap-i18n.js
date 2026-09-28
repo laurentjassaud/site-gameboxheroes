@@ -1,18 +1,15 @@
-// Fichier genere : textes FR / EN de la page Road Map.
+// Fichier genere par tools/gen_roadmap.py : textes FR / EN de roadmap.html.
 window.GBH_I18N = {
   "fr": {
     "meta.title": "GameBoxHeroes — Road Map 2026",
     "meta.description": "Les 24 prochaines étapes de GameBoxHeroes : nouveaux modules, sauvegarde des parties, classement des joueurs, aide au jeu solo.",
-    "hero.title": "Modules jouables de wargames classiques",
-    "rm.headline": "24 points<br>à venir en 2026",
     "rm.label": "Road Map",
-    "rm.text": "Nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!&nbsp;: voici ce que nous préparons, trimestre par trimestre.<br>Les dates sont indicatives et évolueront avec vos retours.",
+    "rm.text": "24 points à venir en 2026&nbsp;: nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!<br>Les dates sont indicatives et évolueront avec vos retours.",
     "rm.stats": "Chiffres clés",
     "rm.filters": "Filtrer par thème",
     "rm.all": "Tout",
     "rm.count.one": "{n} point affiché",
     "rm.count.other": "{n} points affichés",
-    "rm.back": "Retour à l’accueil",
     "stat.total": "Points à venir d’ici fin 2026",
     "stat.modules": "Chantiers modules et missions",
     "stat.progress": "Déjà en cours de développement",
@@ -78,21 +75,20 @@ window.GBH_I18N = {
     "item23.title": "Nouvelles langues",
     "item23.text": "Modules et interface traduits en allemand et en espagnol.",
     "item24.title": "Nouveau module&nbsp;: guerre du Pacifique",
-    "item24.text": "Un module consacré aux opérations amphibies et à la guerre dans les îles du Pacifique."
+    "item24.text": "Un module consacré aux opérations amphibies et à la guerre dans les îles du Pacifique.",
+    "pg.title": "Road Map",
+    "pg.sub": "24 points à venir en 2026&nbsp;: nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!<br>Les dates sont indicatives et évolueront avec vos retours."
   },
   "en": {
     "meta.title": "GameBoxHeroes — 2026 Road Map",
     "meta.description": "GameBoxHeroes’ next 24 milestones: new modules, game saving, player rankings, solo play aids.",
-    "hero.title": "Playable modules of classic wargames",
-    "rm.headline": "24 milestones<br>coming in 2026",
     "rm.label": "Road Map",
-    "rm.text": "New modules, game saving, player rankings, solo play aids, new Ambush! missions: here is what we are building, quarter by quarter.<br>Dates are indicative and will evolve with your feedback.",
+    "rm.text": "24 milestones coming in 2026: new modules, game saving, player rankings, solo play aids, new Ambush! missions.<br>Dates are indicative and will evolve with your feedback.",
     "rm.stats": "Key figures",
     "rm.filters": "Filter by theme",
     "rm.all": "All",
     "rm.count.one": "{n} milestone shown",
     "rm.count.other": "{n} milestones shown",
-    "rm.back": "Back to home",
     "stat.total": "Milestones before the end of 2026",
     "stat.modules": "Module and mission projects",
     "stat.progress": "Already in development",
@@ -158,6 +154,8 @@ window.GBH_I18N = {
     "item23.title": "More languages",
     "item23.text": "Modules and interface translated into German and Spanish.",
     "item24.title": "New module: Pacific War",
-    "item24.text": "A module on amphibious operations and island warfare in the Pacific."
+    "item24.text": "A module on amphibious operations and island warfare in the Pacific.",
+    "pg.title": "Road Map",
+    "pg.sub": "24 milestones coming in 2026: new modules, game saving, player rankings, solo play aids, new Ambush! missions.<br>Dates are indicative and will evolve with your feedback."
   }
 };

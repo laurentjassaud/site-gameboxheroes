@@ -10,12 +10,8 @@ window.GBH_I18N = {
     "news.count.one": "{n} article",
     "news.count.other": "{n} articles",
     "news.filters": "Filtrer par thème",
-    "news.featured": "À la une",
-    "pg.headline": "Le journal<br>du projet",
-    "pg.label": "Actualités",
-    "pg.text": "Sorties de modules, tests publics, nouveautés de la plateforme&nbsp;: toutes les nouvelles du projet, de la plus récente à la plus ancienne.",
-    "feat.arnhem": "Tests publics ouverts à tous les joueurs&nbsp;: scénario principal et mode assisté.",
-    "feat.ambush": "Les missions 1 à 5 sont en préparation.",
+    "pg.title": "Actualités",
+    "pg.sub": "Sorties de modules, tests publics, nouveautés de la plateforme&nbsp;:<br>toutes les nouvelles du projet, de la plus récente à la plus ancienne.",
     "a1.date": "01 octobre 26",
     "a1.p1": "Le module Arnhem entre en test public. Tous les joueurs inscrits peuvent lancer une partie complète de l’opération Market-Garden, en solo contre l’IA ou à deux.",
     "a1.p2": "Cette version couvre le scénario principal et le mode assisté. Vos retours nous aideront à finaliser l’équilibrage et l’ergonomie avant la sortie.",
@@ -48,9 +44,7 @@ window.GBH_I18N = {
     "a6.title": "GameBoxHeroes se lance",
     "a6.lede": "Un projet d’adaptation des classiques du wargame, pour jouer en solo ou en direct à plusieurs.",
     "meta.title": "GameBoxHeroes — Actualités",
-    "meta.description": "Toutes les nouvelles de GameBoxHeroes : modules, tests publics et nouveautés de la plateforme.",
-    "hero.title": "Modules jouables de wargames classiques",
-    "rm.back": "Retour à l’accueil"
+    "meta.description": "Toutes les nouvelles de GameBoxHeroes : modules, tests publics et nouveautés de la plateforme."
   },
   "en": {
     "cat.modules": "Modules",
@@ -62,12 +56,8 @@ window.GBH_I18N = {
     "news.count.one": "{n} article",
     "news.count.other": "{n} articles",
     "news.filters": "Filter by theme",
-    "news.featured": "Featured",
-    "pg.headline": "The<br>project log",
-    "pg.label": "News",
-    "pg.text": "Module releases, public tests, platform updates: all the project news, newest first.",
-    "feat.arnhem": "Public testing open to all players: main scenario and assisted mode.",
-    "feat.ambush": "Missions 1 to 5 are in the works.",
+    "pg.title": "News",
+    "pg.sub": "Module releases, public tests, platform updates:<br>all the project news, newest first.",
     "a1.date": "01 October 26",
     "a1.p1": "The Arnhem module is now in public testing. Every registered player can run a full game of Operation Market-Garden, solo against the AI or head-to-head.",
     "a1.p2": "This build covers the main scenario and assisted mode. Your feedback will help us fine-tune balance and usability before release.",
@@ -100,8 +90,6 @@ window.GBH_I18N = {
     "a6.title": "GameBoxHeroes is launching",
     "a6.lede": "A project adapting classic wargames to play solo or live with others.",
     "meta.title": "GameBoxHeroes — News",
-    "meta.description": "All the GameBoxHeroes news: modules, public tests and platform updates.",
-    "hero.title": "Playable modules of classic wargames",
-    "rm.back": "Back to home"
+    "meta.description": "All the GameBoxHeroes news: modules, public tests and platform updates."
   }
 };

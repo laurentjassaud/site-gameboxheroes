@@ -1,9 +1,8 @@
 // Fichier genere par tools/gen_pages.py : textes FR / EN de qui-sommes-nous.html.
 window.GBH_I18N = {
   "fr": {
-    "pg.headline": "Des joueurs<br>au service du jeu",
-    "pg.label": "Qui sommes-nous",
-    "pg.text": "GameBoxHeroes est né d’une envie simple&nbsp;: rejouer les grands classiques du wargame sans passer des heures à préparer la table, et partager ces parties avec d’autres passionnés.",
+    "pg.title": "Qui sommes-nous",
+    "pg.sub": "GameBoxHeroes est né d’une envie simple&nbsp;: rejouer les grands classiques du wargame sans passer des heures à préparer la table, et partager ces parties avec d’autres passionnés.",
     "about.figures": "Chiffres clés",
     "stat1": "Modules en développement",
     "stat2": "Points à la road map 2026",
@@ -51,14 +50,11 @@ window.GBH_I18N = {
     "cta.contact": "Nous écrire",
     "cta.roadmap": "Voir la road map",
     "meta.title": "GameBoxHeroes — Qui sommes-nous",
-    "meta.description": "GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs. Notre mission, nos principes, notre équipe.",
-    "hero.title": "Modules jouables de wargames classiques",
-    "rm.back": "Retour à l’accueil"
+    "meta.description": "GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs. Notre mission, nos principes, notre équipe."
   },
   "en": {
-    "pg.headline": "Players<br>serving the game",
-    "pg.label": "About us",
-    "pg.text": "GameBoxHeroes started from a simple wish: to replay the great wargame classics without spending hours setting up the table, and to share those games with fellow enthusiasts.",
+    "pg.title": "About us",
+    "pg.sub": "GameBoxHeroes started from a simple wish: to replay the great wargame classics without spending hours setting up the table, and to share those games with fellow enthusiasts.",
     "about.figures": "Key figures",
     "stat1": "Modules in development",
     "stat2": "Milestones on the 2026 road map",
@@ -106,8 +102,6 @@ window.GBH_I18N = {
     "cta.contact": "Write to us",
     "cta.roadmap": "See the road map",
     "meta.title": "GameBoxHeroes — About us",
-    "meta.description": "GameBoxHeroes adapts classic wargames to play solo or live with others. Our mission, principles and team.",
-    "hero.title": "Playable modules of classic wargames",
-    "rm.back": "Back to home"
+    "meta.description": "GameBoxHeroes adapts classic wargames to play solo or live with others. Our mission, principles and team."
   }
 };
