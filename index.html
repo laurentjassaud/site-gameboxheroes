@@ -3,124 +3,176 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title data-i18n="meta.title">GameBoxHeroes — Modules jouables de wargames classiques</title>
+<title data-i18n="meta.title">GameBoxHeroes — Les boîtes de jeux des classiques du wargame</title>
 <meta name="description" data-i18n-attr="content:meta.description" content="GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs.">
+<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="home.css">
 </head>
-<body>
-<div class="page">
-  <main class="stage">
-
-    <!-- Carte en fond (image 4) -->
-    <div class="map" aria-hidden="true">
-      <img src="assets/map.png" alt="">
-    </div>
-
-    <!-- En-tête -->
-    <header class="header">
+<body class="home">
+<!-- Fichier genere par tools/gen_home.py : modifier la source la-bas, pas ce HTML -->
+<header class="top">
+  <div class="wrap">
+    <div class="topbar">
       <div class="brand">
         <a class="brand__logo" href="index.html" aria-label="GameBoxHeroes">
           <img class="brand__logo-hex" src="assets/logo-hex.svg" alt="" width="139" height="156">
-          <img class="brand__logo-text" src="assets/logo-text.svg" alt="GameBoxHeroes" width="78" height="55">
+          <img class="brand__logo-text" src="assets/logo-text.svg" alt="" width="78" height="55">
         </a>
-        <p class="brand__title" data-i18n="hero.title">Modules jouables de wargames classiques</p>
+        <p class="brand__tagline" data-i18n-html="brand.tagline">Les <strong>boîtes</strong> de jeux<br>des classiques du <strong>wargame</strong></p>
       </div>
-      <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-    </header>
-
-    <!-- Accroche -->
-    <section class="lead">
-      <h1 class="lead__headline">
-        <span class="lead__brand">GameBoxHeroes</span>
-        <span class="lead__sub" data-i18n-html="lead.sub">est un projet d’adaptation<br>des classiques du wargame pour jouer en solo ou en direct à plusieurs</span>
-      </h1>
-      <ul class="features">
-        <li class="feature">
-          <img class="feature__bullet" src="assets/hex-bullet.svg" alt="" width="31" height="34">
-          <h2 class="feature__title" data-i18n="feat.assist.title">Mode assisté</h2>
-          <p class="feature__text" data-i18n-html="feat.assist.text">Les modules ont une version assistée<br>qui vérifie la conformité des coups joués.</p>
-        </li>
-        <li class="feature">
-          <img class="feature__bullet" src="assets/hex-bullet.svg" alt="" width="31" height="34">
-          <h2 class="feature__title" data-i18n="feat.versus.title">Parties entre adversaires optimisées</h2>
-          <p class="feature__text" data-i18n-html="feat.versus.text">Amélioration de l’expérience de jeu par <strong>double aveugle</strong>, partie chronométrée type <strong>blitz</strong>, ajout des <strong>variantes</strong> créées par les fans</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- Photo + pions -->
-    <div class="hero-photo hero-photo--home" aria-hidden="true">
-      <img src="assets/hero-photo.png" alt="" width="600" height="465">
+      <div class="topbar__actions">
+        <div class="account">
+          <a class="account__btn" href="compte.html" data-i18n-attr="aria-label:account.label" aria-label="Mon compte">
+            <svg class="account__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c.8-3.9 3.9-6.3 7.5-6.3s6.7 2.4 7.5 6.3"/></svg>
+            <span class="account__initial" aria-hidden="true"></span>
+          </a>
+        </div>
+        <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
 
-    <!-- Modules -->
-    <section class="modules" id="modules" data-i18n-attr="aria-label:modules.label" aria-label="Modules">
-      <a class="module" href="#">
-        <div class="module__cover module__cover--center">
-          <img src="assets/cover-arnhem.jpg" alt="Arnhem: Operation Market-Garden" width="210" height="266">
-        </div>
-        <div class="module__card">
-          <h2 class="module__title">A Bridge Too Far: Arnhem (1976)</h2>
-          <p class="module__desc" data-i18n-html="modules.arnhem">Arnhem&nbsp;: Operation Market-Garden, septembre 1944, est un wargame de plateau pour deux joueurs, de niveau opérationnel, faisant à l’origine partie du <span>quad Westwall</span>.</p>
-          <img class="module__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
-        </div>
-      </a>
-      <a class="module" href="#">
-        <div class="module__cover module__cover--top">
-          <img src="assets/cover-ambush.jpg" alt="Ambush!" width="150" height="206">
-        </div>
-        <div class="module__card">
-          <h2 class="module__title">Ambush! (1983)</h2>
-          <p class="module__desc module__desc--low" data-i18n="modules.ambush">Menez une escouade dans une série de combats tactiques de 39-45, tout droit sortis d’Hollywood&nbsp;!</p>
-          <img class="module__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
-        </div>
-      </a>
-    </section>
-
-    <!-- Séparateurs -->
-    <span class="rule rule--main rule--top" aria-hidden="true"></span>
-    <span class="rule rule--side rule--top" aria-hidden="true"></span>
-    <span class="rule rule--main rule--bottom" aria-hidden="true"></span>
-    <span class="rule rule--side rule--bottom" aria-hidden="true"></span>
-
-    <!-- Actualités -->
-    <section class="news" id="actualites">
-      <div class="news__head reveal">
-        <h2 class="news__title" data-i18n="news.title">Actualités</h2>
-        <a class="news__all" href="actualites.html" data-i18n="news.all">Voir toutes les actualités</a>
+    <div class="hero cols">
+      <div class="hero__lead">
+        <h1 class="wordmark">Game<span>Box</span>Heroes</h1>
+        <p class="hero__text" data-i18n-html="home.lead">est un site personnel dans lequel je développe<br>l’adaptation de classiques du wargame<br>pour jouer en solo ou en direct<br>et à plusieurs</p>
       </div>
-      <ul class="news__list">
-        <li class="news__item reveal">
-          <time datetime="2026-10-01" data-i18n="news.date">01 octobre 26</time>
-          <span data-i18n-html="news.item1">Mise en ligne des tests publics pour le jeu <span class="news__hl">Arnhem</span> publié en 1976 par SPI.</span><br>
-          <a class="news__more" href="actualites.html#arnhem-tests-publics" data-i18n="news.more">Lire la suite</a>
-        </li>
-        <li class="news__item reveal">
-          <time datetime="2026-10-01" data-i18n="news.date">01 octobre 26</time>
-          <span data-i18n-html="news.item2">Mise en ligne des tests publics du jeu <span class="news__hl">Arnhem</span> publié en 1976 par SPI.</span>
-        </li>
-        <li class="news__item reveal">
-          <time datetime="2026-10-01" data-i18n="news.date">01 octobre 26</time>
-          <span data-i18n-html="news.item2">Mise en ligne des tests publics du jeu <span class="news__hl">Arnhem</span> publié en 1976 par SPI.</span>
-        </li>
+      <section class="latest" id="modules" aria-labelledby="latest-title">
+        <h2 class="latest__title" id="latest-title" data-i18n-html="home.latest">Dernières boîtes</h2>
+        <ul class="boxes">
+          <li>
+            <a class="box" href="actualites.html#arnhem-tests-publics">
+              <img class="box__cover" src="assets/cover-arnhem.jpg" alt="Arnhem: Operation Market-Garden" width="150" height="184">
+              <div class="box__body">
+                <h3 class="box__title">A Bridge Too Far: Arnhem (1976)</h3>
+                <span class="badge badge--red" data-i18n-html="box1.badge">Bêta publique</span>
+                <p class="box__desc" data-i18n-html="box1.desc">Arnhem&nbsp;: Operation Market-Garden, septembre 1944, est un wargame de plateau pour deux joueurs, de niveau opérationnel, faisant à l’origine partie du quad Westwall.</p>
+                <img class="box__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="box" href="actualites.html#ambush-missions">
+              <img class="box__cover" src="assets/cover-ambush.jpg" alt="Ambush!" width="150" height="184">
+              <div class="box__body">
+                <h3 class="box__title">Ambush! (1983)</h3>
+                <span class="badge" data-i18n-html="box2.badge">Alpha privée</span>
+                <p class="box__desc" data-i18n-html="box2.desc">Menez une escouade dans une série de combats tactiques de 39-45, tout droit sortis d’Hollywood&nbsp;!</p>
+                <img class="box__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
+              </div>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </div>
+    <p class="credit" data-i18n-html="credit">Carte et pions provenant du jeu <strong>Normandy ’44</strong><br>dans un but illustratif uniquement - <strong>Tous droits GMT Games</strong></p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap cols home-sec">
+    <section class="work ruled" aria-labelledby="work-title">
+      <div class="sec-head">
+        <h2 class="sec-title" id="work-title" data-i18n-html="home.work">Travail en cours</h2>
+        <a class="link-more" href="actualites.html" data-i18n-html="home.more">En voir plus</a>
+      </div>
+      <ul class="work__list">
+          <li class="work__item reveal">
+            <img class="work__img" src="assets/home/work-1.jpg" data-i18n-attr="alt:work1.alt" alt="Carte de jeu" width="386" height="288" loading="lazy">
+            <h3 class="work__title" data-i18n-html="work1.title">Test public</h3>
+            <p class="work__text" data-i18n-html="work1.text">Le jeu <a href="actualites.html#arnhem-tests-publics">Arnhem</a> publié en 1976 par SPI est prêt à être testé&nbsp;: ouverture de la bêta publique.</p>
+          </li>
+          <li class="work__item reveal">
+            <img class="work__img" src="assets/home/work-2.jpg" data-i18n-attr="alt:work2.alt" alt="Pions sur la carte" width="386" height="288" loading="lazy">
+            <h3 class="work__title" data-i18n-html="work2.title">Sur la table</h3>
+            <p class="work__text" data-i18n-html="work2.text">Enemy Action: Kharkov</p>
+          </li>
+          <li class="work__item reveal">
+            <img class="work__img" src="assets/home/work-3.jpg" data-i18n-attr="alt:work3.alt" alt="Partie en cours sur une carte" width="386" height="288" loading="lazy">
+            <h3 class="work__title" data-i18n-html="work3.title">Mise en ligne</h3>
+            <p class="work__text" data-i18n-html="work3.text">Accès public du site GameBoxHeroes. L’aventure commence&nbsp;!</p>
+          </li>
       </ul>
     </section>
+    <section class="specs ruled" aria-labelledby="specs-title">
+      <h2 class="sec-title" id="specs-title" data-i18n-html="home.specs">Particularités des boîtes</h2>
+          <div class="spec reveal">
+            <h3 class="spec__title" data-i18n-html="spec1.title">Mode assisté</h3>
+            <p class="spec__text" data-i18n-html="spec1.p1">Toutes les boîtes auront la possibilité de jouer dans un mode assisté qui vérifiera la légalité des actions. Les règles seront implémentées en incluant les <em>Questions &amp; Answers</em> du forum BoardGameGeek. Bien sûr, un mode libre permettra aux joueurs de jouer sans assistance.</p>
+          </div>
+          <div class="spec reveal">
+            <h3 class="spec__title" data-i18n-html="spec2.title">Parties optimisées en «&nbsp;face à face&nbsp;»</h3>
+            <p class="spec__text" data-i18n-html="spec2.p1">Amélioration de l’expérience de jeu par <em>double aveugle</em>, partie chronométrée type <em>blitz</em> et ajout de toutes les <em>variantes</em>, notamment celles créées par les fans.</p>
+          </div>
+          <div class="spec reveal">
+            <h3 class="spec__title" data-i18n-html="spec3.title">Jeu solo</h3>
+            <p class="spec__text" data-i18n-html="spec3.p1">Pour les <strong>jeux solos</strong>, l’interface de la boîte active rigoureusement tout le système du <em>moteur solo</em>. Différents niveaux de contrôle permettent soit de tirer soi-même les dés sur les différents <em>flowcharts</em>, soit de laisser l’interface résoudre les réponses du moteur de jeu pour ne se consacrer qu’à la stratégie.</p>
+            <p class="spec__text" data-i18n-html="spec3.p2">Pour les jeux prévus à <strong>deux joueurs</strong>, un travail sur une IA symbolique est en cours&nbsp;: il permettra d’avoir un adversaire compétent sur tous les jeux.</p>
+          </div>
+    </section>
+  </div>
 
-    <div class="home-sign">
-      <p class="home-sign__text">GameBoxHeroes 2026</p>
-      <a class="home-sign__mark" href="index.html" aria-label="GameBoxHeroes">
+  <section class="prep" aria-labelledby="prep-title">
+    <div class="wrap cols">
+      <div class="ruled">
+        <h2 class="prep__title" id="prep-title" data-i18n-html="home.prep">Les boîtes en préparation</h2>
+      </div>
+      <div class="ruled" aria-hidden="true"></div>
+    </div>
+    <ul class="prep__strip">
+      <li><img src="assets/home/prep-arnhem.jpg" alt="Arnhem: Operation Market-Garden" loading="lazy"></li>
+      <li><img src="assets/home/prep-ambush.jpg" alt="Ambush!" loading="lazy"></li>
+      <li><img src="assets/home/prep-pattons-best.jpg" alt="Patton’s Best" loading="lazy"></li>
+      <li><img src="assets/home/prep-carrier-battle.jpg" alt="Carrier Battle: South Pacific" loading="lazy"></li>
+    </ul>
+  </section>
+
+  <section class="about wrap reveal">
+    <p class="wordmark" aria-hidden="true">Game<span>Box</span>Heroes</p>
+    <p class="about__text" data-i18n-html="home.about"><span class="sr-only">GameBoxHeroes </span>est un site personnel et non commercial, développé en temps libre par passion des wargames et des jeux en solo</p>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <div class="foot__cols cols">
+    <form class="news-form" novalidate>
+      <h2 class="sec-title sec-title--plain" data-i18n="nl.title">Rester au courant de l’avancement des projets</h2>
+      <div class="news-form__row">
+        <div>
+          <div class="news-form__input">
+            <label class="sr-only" for="nl-email" data-i18n="nl.label">Votre e-mail</label>
+            <input id="nl-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" maxlength="254" data-i18n-attr="placeholder:nl.placeholder" placeholder="Votre e-mail" required aria-describedby="nl-msg">
+            <button class="news-form__submit" type="submit"><span data-i18n="nl.submit">Envoyer</span></button>
+          </div>
+          <p class="news-form__msg" id="nl-msg" role="status"></p>
+        </div>
+        <div class="field field--check">
+          <input id="nl-consent" name="consent" type="checkbox" value="1" required>
+          <label for="nl-consent" data-i18n-html="nl.consent">J’accepte que mon e-mail soit utilisé uniquement pour recevoir des nouvelles des projets. <a href="mentions-legales.html#newsletter">En savoir plus</a></label>
+        </div>
+      </div>
+    </form>
+    <div class="sign">
+      <a class="sign__mark" href="index.html" aria-label="GameBoxHeroes">
         <img src="assets/logo-mark.svg" alt="" width="65" height="73">
       </a>
+      <div>
+        <p class="sign__name">GameBoxHeroes 2026</p>
+        <p class="sign__links">
+          <a href="mentions-legales.html" data-i18n="foot.legal">Mentions légales</a>
+          <a href="mentions-legales.html#confidentialite" data-i18n="foot.privacy">Confidentialité</a>
+          <a href="contact.html" data-i18n="menu.contact">Contact</a>
+        </p>
+      </div>
     </div>
-  </main>
-</div>
+  </div>
+</footer>
 
-<!-- Menu latéral -->
 <div class="menu" id="menu" hidden>
   <div class="menu__backdrop" data-close></div>
   <nav class="menu__panel" data-i18n-attr="aria-label:menu.label" aria-label="Menu principal">
@@ -133,15 +185,22 @@
       <li><a href="roadmap.html" data-i18n="menu.roadmap">Road Map</a></li>
       <li><a href="qui-sommes-nous.html" data-i18n="menu.about">Qui sommes-nous</a></li>
       <li><a href="contact.html" data-i18n="menu.contact">Contact</a></li>
+      <li><a href="compte.html" data-i18n="menu.account">Mon compte</a></li>
     </ul>
-    <div class="lang" role="group" data-i18n-attr="aria-label:menu.language" aria-label="Langue">
-      <button type="button" class="lang__btn" data-lang="fr" lang="fr">FR</button>
-      <span class="lang__sep" aria-hidden="true">/</span>
-      <button type="button" class="lang__btn" data-lang="en" lang="en">EN</button>
+    <div class="menu__foot">
+      <a class="menu__legal" href="mentions-legales.html" data-i18n="foot.legal">Mentions légales</a>
+      <div class="lang" role="group" data-i18n-attr="aria-label:menu.language" aria-label="Langue">
+        <button type="button" class="lang__btn" data-lang="fr" lang="fr">FR</button>
+        <span class="lang__sep" aria-hidden="true">/</span>
+        <button type="button" class="lang__btn" data-lang="en" lang="en">EN</button>
+      </div>
     </div>
   </nav>
 </div>
 
+<script src="index-i18n.js"></script>
 <script src="script.js"></script>
+<script type="module" src="account.js"></script>
+<script type="module" src="newsletter.js"></script>
 </body>
 </html>
