@@ -1,0 +1,331 @@
+/* ==========================================================================
+   Page Mon compte — connexion, inscription en 3 etapes, resume du compte.
+   S'appuie sur style.css (champs, boutons) et contact.css (colonne laterale).
+   ========================================================================== */
+
+
+.auth { min-width: 0; }
+.auth > * { max-width: 620px; }
+
+/* Un seul etat visible a la fois : loading | off | out | in */
+.auth__loading,
+.auth__off,
+.auth__guest,
+.auth__member { display: none; }
+
+.auth[data-state="loading"] .auth__loading { display: block; }
+.auth[data-state="off"] .auth__off { display: block; }
+.auth[data-state="out"] .auth__guest { display: block; animation: fade-in 0.2s ease both; }
+.auth[data-state="in"] .auth__member { display: block; animation: fade-up 0.3s var(--ease-out) both; }
+
+.auth__loading { padding: 40px 0; }
+.auth__loading .spinner { color: var(--red); border-color: rgba(255, 0, 0, 0.2); border-top-color: var(--red); }
+
+.auth__off {
+  padding: 22px 24px;
+  background: var(--cream);
+  box-shadow: inset 0 0 0 1px var(--rule);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* ---------- Onglets ---------- */
+
+.tabs {
+  position: relative;
+  display: flex;
+  gap: 28px;
+  margin-bottom: 32px;
+  box-shadow: inset 0 -2px 0 var(--rule);
+}
+
+.tabs__tab {
+  padding: 6px 0 14px;
+  font-family: var(--font-display);
+  font-size: max(20px, calc(30 * var(--u)));
+  line-height: 1.1;
+  font-weight: 700;
+  color: #9a9a94;
+  transition: color 0.2s ease;
+}
+
+.tabs__tab[aria-selected="true"] { color: var(--black); }
+
+@media (hover: hover) and (pointer: fine) {
+  .tabs__tab:hover { color: var(--black); }
+}
+
+/* Soulignement rouge qui glisse d'un onglet a l'autre (transform uniquement) */
+.tabs__ink {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  height: 2px;
+  background: var(--red);
+  transform-origin: left center;
+  transform: translateX(var(--ink-x, 0)) scaleX(var(--ink-s, 0));
+  transition: transform 0.25s var(--ease-out);
+}
+
+.tabs__panel { animation: fade-in 0.18s ease both; }
+.tabs__panel[hidden] { display: none; }
+
+/* ---------- Formulaires ---------- */
+
+.auth-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  margin-top: 8px;
+}
+
+.auth-link {
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.auth-link--danger { color: var(--red); }
+
+@media (hover: hover) and (pointer: fine) {
+  .auth-link:hover { color: var(--black); }
+  .auth-link--danger:hover { color: var(--red-press); }
+}
+
+.btn .spinner { width: 15px; height: 15px; }
+
+/* Mot de passe avec bouton afficher / masquer */
+.pwd { position: relative; }
+.pwd input { padding-right: 52px; }
+
+.pwd__toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  translate: 0 -50%;
+  background: center / 20px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+  opacity: 0.55;
+  transition: opacity 0.15s ease, transform 0.16s var(--ease-out);
+}
+
+.pwd__toggle[aria-pressed="true"] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M4 4l16 16'/%3E%3C/svg%3E");
+  opacity: 0.9;
+}
+
+.pwd__toggle:active { transform: scale(0.92); }
+
+@media (hover: hover) and (pointer: fine) {
+  .pwd__toggle:hover { opacity: 0.9; }
+}
+
+/* Disponibilite du pseudo */
+.avail {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.avail[data-state] { display: flex; animation: fade-in 0.15s ease both; }
+.avail[data-state="checking"] { color: var(--muted); }
+.avail[data-state="free"] { color: #1a7f37; }
+.avail[data-state="taken"] { color: var(--red); }
+
+.avail::before {
+  content: "";
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.avail[data-state="checking"]::before {
+  border: 2px solid #d6d6d0;
+  border-top-color: var(--muted);
+  animation: spin 0.7s linear infinite;
+}
+
+.avail[data-state="free"]::before {
+  background: #1a7f37 center / 10px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.5 5.5 11 12 3.5' fill='none' stroke='white' stroke-width='2.4'/%3E%3C/svg%3E");
+}
+
+.avail[data-state="taken"]::before {
+  background: var(--red) center / 8px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1 1 9' stroke='white' stroke-width='2'/%3E%3C/svg%3E");
+}
+
+/* Jauge de robustesse du mot de passe */
+.meter {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  align-items: center;
+  gap: 4px;
+}
+
+.meter span {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--rule);
+  transition: background-color 0.25s ease;
+}
+
+.meter em {
+  min-width: 70px;
+  padding-left: 8px;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  text-align: right;
+}
+
+.meter[data-score="1"] span:nth-child(-n + 1) { background: var(--red); }
+.meter[data-score="2"] span:nth-child(-n + 2) { background: #f0a000; }
+.meter[data-score="3"] span:nth-child(-n + 3) { background: #6fa82f; }
+.meter[data-score="4"] span:nth-child(-n + 4) { background: #1a7f37; }
+.meter[data-score="1"] em { color: var(--red); }
+.meter[data-score="2"] em { color: #b37700; }
+.meter[data-score="3"] em { color: #4f7f1d; }
+.meter[data-score="4"] em { color: #1a7f37; }
+
+/* ---------- Etapes de l'inscription ---------- */
+
+.steps {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  list-style: none;
+}
+
+.steps__item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 3px solid var(--rule);
+  font-size: 14px;
+  font-weight: 500;
+  color: #9a9a94;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.steps__item span {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--rule);
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.steps__item em { font-style: normal; }
+
+.steps__item.is-current,
+.steps__item.is-done { border-color: var(--red); color: var(--black); }
+.steps__item.is-current span,
+.steps__item.is-done span { background: var(--red); color: var(--white); }
+
+.step:not([hidden]) { animation: fade-up 0.25s var(--ease-out) both; }
+
+.step__title {
+  margin-bottom: 18px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 700;
+  outline: none;
+}
+
+.step__label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.step__big {
+  margin: 6px 0 14px;
+  font-family: var(--font-display);
+  font-size: max(32px, calc(55 * var(--u)));
+  line-height: 1.02;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  outline: none;
+}
+
+.step__note {
+  margin-bottom: 22px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #3a3a3a;
+}
+
+.recap {
+  display: grid;
+  margin: 0 0 18px;
+  background: var(--cream);
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+
+.recap div {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 18px;
+}
+
+.recap div + div { border-top: 1px solid var(--rule); }
+.recap dt { font-weight: 600; }
+.recap dd { margin: 0; overflow-wrap: anywhere; }
+
+/* ---------- Compte connecte ---------- */
+
+.member-mail { font-size: 18px; }
+
+.member-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.member-status::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.member-status.is-ok { color: #1a7f37; }
+.member-status.is-warn { color: #b37700; }
+
+.member-since {
+  margin: 4px 0 28px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.member-since:empty { display: none; }
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 900px) {
+  .tabs { gap: 20px; }
+  .recap div { grid-template-columns: 1fr; gap: 2px; }
+  .steps__item em { display: none; }
+}

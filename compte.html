@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="meta.title">GameBoxHeroes — Mon compte</title>
+<meta name="description" data-i18n-attr="content:meta.description" content="Connectez-vous ou créez votre compte GameBoxHeroes pour sauvegarder vos parties.">
+<link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700;800;900&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="roadmap.css">
+<link rel="stylesheet" href="contact.css">
+<link rel="stylesheet" href="compte.css">
+</head>
+<body class="page-account">
+<!-- Fichier genere par tools/gen_static.py : modifier la source la-bas, pas ce HTML -->
+<header class="top">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <a class="brand__logo" href="index.html" data-i18n-attr="aria-label:rm.back" aria-label="Retour à l’accueil">
+          <img class="brand__logo-hex" src="assets/logo-hex.svg" alt="" width="139" height="156">
+          <img class="brand__logo-text" src="assets/logo-text.svg" alt="" width="78" height="55">
+        </a>
+        <p class="brand__tagline" data-i18n-html="brand.tagline">Les <strong>boîtes</strong> de jeux<br>des classiques du <strong>wargame</strong></p>
+      </div>
+      <div class="topbar__actions">
+        <div class="account">
+          <a class="account__btn" href="compte.html" data-i18n-attr="aria-label:account.label" aria-label="Mon compte">
+            <svg class="account__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="4"/><path d="M4.5 20.5c.8-3.9 3.9-6.3 7.5-6.3s6.7 2.4 7.5 6.3"/></svg>
+            <span class="account__initial" aria-hidden="true"></span>
+          </a>
+        </div>
+        <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="top__intro">
+      <h1 class="top__title" data-i18n-html="pg.title">Mon compte</h1>
+      <p class="top__sub" data-i18n-html="pg.sub">Connectez-vous pour retrouver vos parties,<br>ou créez votre compte en une minute.</p>
+    </div>
+    <p class="credit" data-i18n-html="credit">Carte et pions provenant du jeu <strong>Normandy ’44</strong><br>dans un but illustratif uniquement - <strong>Tous droits GMT Games</strong></p>
+  </div>
+</header>
+
+<main>
+  <div class="wrap cols split auth-body">
+    <div class="auth" data-state="loading">
+      <p class="auth__loading" aria-live="polite"><span class="spinner" aria-hidden="true"></span></p>
+
+      <p class="auth__off" data-i18n-html="auth.off">Les comptes joueurs ouvriront très bientôt. En attendant, suivez l’avancement du projet grâce à la lettre d’information en bas de page.</p>
+
+      <!-- Deconnecte : onglets Connexion / Inscription -->
+      <div class="auth__guest">
+        <div class="tabs" role="tablist" data-i18n-attr="aria-label:auth.tabs" aria-label="Connexion ou inscription">
+          <button class="tabs__tab" type="button" role="tab" id="tab-login" aria-controls="panel-login" aria-selected="true" data-i18n="auth.tab.login">Connexion</button>
+          <button class="tabs__tab" type="button" role="tab" id="tab-signup" aria-controls="panel-signup" aria-selected="false" tabindex="-1" data-i18n="auth.tab.signup">Créer un compte</button>
+          <span class="tabs__ink" aria-hidden="true"></span>
+        </div>
+
+        <section class="tabs__panel" id="panel-login" role="tabpanel" aria-labelledby="tab-login">
+          <form class="auth-form" id="login-form" novalidate>
+            <div class="form-status" role="alert" hidden></div>
+            <div class="field" data-field="email">
+              <label for="l-email" data-i18n="auth.email">E-mail</label>
+              <input id="l-email" name="email" type="email" autocomplete="username" inputmode="email" spellcheck="false" maxlength="254" required aria-describedby="l-email-err">
+              <p class="field__error" id="l-email-err"></p>
+            </div>
+            <div class="field" data-field="password">
+              <label for="l-password" data-i18n="auth.password">Mot de passe</label>
+              <div class="pwd">
+                <input id="l-password" name="password" type="password" autocomplete="current-password" maxlength="128" required aria-describedby="l-password-err">
+                <button class="pwd__toggle" type="button" aria-controls="l-password" aria-pressed="false" data-i18n-attr="aria-label:auth.show" aria-label="Afficher le mot de passe"></button>
+              </div>
+              <p class="field__error" id="l-password-err"></p>
+            </div>
+            <div class="auth-form__actions">
+              <button class="btn btn--red" type="submit"><span data-i18n="auth.submitLogin">Se connecter</span></button>
+              <button class="auth-link" type="button" data-action="reset" data-i18n="auth.forgot">Mot de passe oublié&nbsp;?</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="tabs__panel" id="panel-signup" role="tabpanel" aria-labelledby="tab-signup" hidden>
+          <form class="auth-form" id="signup-form" novalidate>
+            <ol class="steps" aria-hidden="true">
+              <li class="steps__item is-current" data-step-dot="1"><span>1</span><em data-i18n="auth.step1">Vos informations</em></li>
+              <li class="steps__item" data-step-dot="2"><span>2</span><em data-i18n="auth.step2">Vérification</em></li>
+              <li class="steps__item" data-step-dot="3"><span>3</span><em data-i18n="auth.step3">Confirmation</em></li>
+            </ol>
+
+            <div class="form-status" role="alert" hidden></div>
+
+            <!-- Etape 1 : saisie -->
+            <div class="step" data-step="1">
+              <div class="field" data-field="username">
+                <label for="s-username" data-i18n="auth.username">Pseudo</label>
+                <input id="s-username" name="username" type="text" autocomplete="nickname" autocapitalize="off" spellcheck="false" minlength="3" maxlength="20" required aria-describedby="s-username-hint s-username-avail s-username-err">
+                <p class="field__hint" id="s-username-hint" data-i18n="auth.usernameHint">3 à 20 caractères&nbsp;: lettres sans accent, chiffres, « - » et « _ ». Visible des autres joueurs.</p>
+                <p class="avail" id="s-username-avail" aria-live="polite"></p>
+                <p class="field__error" id="s-username-err"></p>
+              </div>
+              <div class="field" data-field="email">
+                <label for="s-email" data-i18n="auth.email">E-mail</label>
+                <input id="s-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" maxlength="254" required aria-describedby="s-email-err">
+                <p class="field__error" id="s-email-err"></p>
+              </div>
+              <div class="field" data-field="password">
+                <label for="s-password" data-i18n="auth.password">Mot de passe</label>
+                <div class="pwd">
+                  <input id="s-password" name="password" type="password" autocomplete="new-password" maxlength="128" required aria-describedby="s-password-hint s-password-err">
+                  <button class="pwd__toggle" type="button" aria-controls="s-password" aria-pressed="false" data-i18n-attr="aria-label:auth.show" aria-label="Afficher le mot de passe"></button>
+                </div>
+                <div class="meter" data-score="0" aria-hidden="true"><span></span><span></span><span></span><span></span><em></em></div>
+                <p class="field__hint" id="s-password-hint" data-i18n="auth.passwordHint">Au moins 8 caractères, avec au moins une lettre et un chiffre.</p>
+                <p class="field__error" id="s-password-err"></p>
+              </div>
+              <div class="field" data-field="password2">
+                <label for="s-password2" data-i18n="auth.password2">Confirmez le mot de passe</label>
+                <input id="s-password2" name="password2" type="password" autocomplete="new-password" maxlength="128" required aria-describedby="s-password2-err">
+                <p class="field__error" id="s-password2-err"></p>
+              </div>
+              <div class="auth-form__actions">
+                <button class="btn btn--red" type="button" data-action="next"><span data-i18n="auth.continue">Continuer</span><img src="assets/arrow.svg" alt="" width="30" height="31"></button>
+              </div>
+            </div>
+
+            <!-- Etape 2 : verification et acceptation -->
+            <div class="step" data-step="2" hidden>
+              <h2 class="step__title" tabindex="-1" data-i18n-html="auth.recapTitle">Vérifiez vos informations</h2>
+              <dl class="recap">
+                <div><dt data-i18n="auth.username">Pseudo</dt><dd data-recap="username"></dd></div>
+                <div><dt data-i18n="auth.email">E-mail</dt><dd data-recap="email"></dd></div>
+                <div><dt data-i18n="auth.password">Mot de passe</dt><dd>••••••••</dd></div>
+              </dl>
+              <p class="step__note" data-i18n-html="auth.recapNote">Votre pseudo sera visible des autres joueurs et ne pourra plus être modifié. Un e-mail de vérification sera envoyé à l’adresse indiquée.</p>
+              <div class="field field--check" data-field="consent">
+                <input id="s-consent" name="consent" type="checkbox" value="1" required aria-describedby="s-consent-err">
+                <label for="s-consent" data-i18n-html="auth.consent">J’ai lu les <a href="mentions-legales.html#confidentialite" target="_blank" rel="noopener">mentions légales et la politique de confidentialité</a>, et j’accepte que ces données soient utilisées pour créer et gérer mon compte.</label>
+                <p class="field__error" id="s-consent-err"></p>
+              </div>
+              <div class="field field--check" data-field="age">
+                <input id="s-age" name="age" type="checkbox" value="1" required aria-describedby="s-age-err">
+                <label for="s-age" data-i18n-html="auth.age">J’ai 15 ans ou plus, ou j’ai l’accord d’un parent.</label>
+                <p class="field__error" id="s-age-err"></p>
+              </div>
+              <div class="auth-form__actions">
+                <button class="btn btn--ghost" type="button" data-action="back"><span data-i18n="auth.edit">Modifier</span></button>
+                <button class="btn btn--red" type="submit"><span data-i18n="auth.create">Créer mon compte</span></button>
+              </div>
+            </div>
+
+            <!-- Etape 3 : compte cree -->
+            <div class="step step--done" data-step="3" hidden>
+              <p class="step__label" data-i18n="auth.doneLabel">Compte créé</p>
+              <h2 class="step__big" tabindex="-1" data-welcome></h2>
+              <p class="step__note" data-sent></p>
+              <div class="auth-form__actions">
+                <a class="btn btn--red" href="index.html" data-back-link><span data-i18n="auth.go">Continuer</span><img src="assets/arrow.svg" alt="" width="30" height="31"></a>
+              </div>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <!-- Connecte : resume du compte -->
+      <section class="auth__member" aria-labelledby="member-name">
+        <p class="step__label" data-i18n="auth.signedAs">Connecté en tant que</p>
+        <h2 class="step__big" id="member-name" data-member="name"></h2>
+        <p class="member-mail" data-member="email"></p>
+        <p class="member-status" data-member="status"></p>
+        <p class="member-since" data-member="since"></p>
+        <div class="auth-form__actions">
+          <button class="btn btn--ghost" type="button" data-action="logout"><span data-i18n="account.logout">Se déconnecter</span></button>
+          <button class="auth-link auth-link--danger" type="button" data-action="delete" data-i18n="account.delete">Supprimer mon compte</button>
+        </div>
+      </section>
+    </div>
+
+    <aside class="ct-aside">
+      <div class="info">
+        <p class="info__label" data-i18n-html="side.why.label">Pourquoi un compte&nbsp;?</p>
+        <p class="info__text" data-i18n-html="side.why.text">Sauvegarder vos parties et les reprendre sur n’importe quel appareil, jouer contre d’autres joueurs, suivre votre progression.</p>
+      </div>
+      <div class="info">
+        <p class="info__label" data-i18n-html="side.data.label">Vos données</p>
+        <p class="info__text" data-i18n-html="side.data.text">Nous ne conservons que votre pseudo, votre e-mail et votre progression. Rien n’est revendu ni partagé. Détails dans les <a href="mentions-legales.html#confidentialite">mentions légales</a>.</p>
+      </div>
+      <div class="info">
+        <p class="info__label" data-i18n-html="side.delete.label">Supprimer votre compte</p>
+        <p class="info__text" data-i18n-html="side.delete.text">À tout moment, depuis le bouton compte en haut de page&nbsp;: toutes vos données sont alors effacées immédiatement.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="foot wrap">
+  <div class="foot__cols cols">
+    <form class="news-form" novalidate>
+      <h2 class="sec-title sec-title--plain" data-i18n="nl.title">Rester au courant de l’avancement des projets</h2>
+      <div class="news-form__row">
+        <div>
+          <div class="news-form__input">
+            <label class="sr-only" for="nl-email" data-i18n="nl.label">Votre e-mail</label>
+            <input id="nl-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" maxlength="254" data-i18n-attr="placeholder:nl.placeholder" placeholder="Votre e-mail" required aria-describedby="nl-msg">
+            <button class="news-form__submit" type="submit"><span data-i18n="nl.submit">Envoyer</span></button>
+          </div>
+          <p class="news-form__msg" id="nl-msg" role="status"></p>
+        </div>
+        <div class="field field--check">
+          <input id="nl-consent" name="consent" type="checkbox" value="1" required>
+          <label for="nl-consent" data-i18n-html="nl.consent">J’accepte que mon e-mail soit utilisé uniquement pour recevoir des nouvelles des projets. <a href="mentions-legales.html#newsletter">En savoir plus</a></label>
+        </div>
+      </div>
+    </form>
+    <div class="sign">
+      <a class="sign__mark" href="index.html" aria-label="GameBoxHeroes">
+        <img src="assets/logo-mark.svg" alt="" width="65" height="73">
+      </a>
+      <div>
+        <p class="sign__name">GameBoxHeroes 2026</p>
+        <p class="sign__links">
+          <a href="mentions-legales.html" data-i18n="foot.legal">Mentions légales</a>
+          <a href="mentions-legales.html#confidentialite" data-i18n="foot.privacy">Confidentialité</a>
+          <a href="contact.html" data-i18n="menu.contact">Contact</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu__backdrop" data-close></div>
+  <nav class="menu__panel" data-i18n-attr="aria-label:menu.label" aria-label="Menu principal">
+    <button class="menu__close" type="button" data-close data-i18n-attr="aria-label:menu.close" aria-label="Fermer le menu">
+      <span></span><span></span>
+    </button>
+    <ul class="menu__links">
+      <li><a href="index.html#modules" data-i18n="menu.modules">Modules</a></li>
+      <li><a href="actualites.html" data-i18n="menu.news">Actualités</a></li>
+      <li><a href="roadmap.html" data-i18n="menu.roadmap">Road Map</a></li>
+      <li><a href="qui-sommes-nous.html" data-i18n="menu.about">Qui sommes-nous</a></li>
+      <li><a href="contact.html" data-i18n="menu.contact">Contact</a></li>
+      <li><a href="compte.html" aria-current="page" data-close data-i18n="menu.account">Mon compte</a></li>
+    </ul>
+    <div class="menu__foot">
+      <a class="menu__legal" href="mentions-legales.html" data-i18n="foot.legal">Mentions légales</a>
+      <div class="lang" role="group" data-i18n-attr="aria-label:menu.language" aria-label="Langue">
+        <button type="button" class="lang__btn" data-lang="fr" lang="fr">FR</button>
+        <span class="lang__sep" aria-hidden="true">/</span>
+        <button type="button" class="lang__btn" data-lang="en" lang="en">EN</button>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<script src="compte-i18n.js"></script>
+<script src="script.js"></script>
+<script type="module" src="account.js"></script>
+<script type="module" src="newsletter.js"></script>
+<script type="module" src="compte.js"></script>
+</body>
+</html>

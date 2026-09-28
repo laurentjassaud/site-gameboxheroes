@@ -1,0 +1,72 @@
+rules_version = '2';
+
+// Regles Firestore de l'espace compte GameBoxHeroes.
+// A publier dans la console Firebase > Firestore Database > Regles.
+//
+// Deux collections :
+//   usernames/{pseudo en minuscules} -> { uid }   : reservation unique des pseudos
+//   users/{uid} -> { username, usernameLower, email, lang, createdAt, consentAt }
+//
+// Unicite des pseudos : un document usernames/{pseudo} ne peut qu'etre cree
+// (jamais modifie). S'il existe deja, l'ecriture est refusee, meme si deux
+// inscriptions arrivent en meme temps. Les deux documents sont ecrits dans le
+// meme lot (batch) : l'un ne peut pas exister sans l'autre.
+// Unicite des e-mails : garantie par Firebase Authentication.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    match /usernames/{name} {
+      // Lecture unitaire publique pour tester la disponibilite d'un pseudo ;
+      // la liste complete n'est jamais lisible.
+      allow get: if true;
+      allow list: if false;
+
+      allow create: if signedIn()
+        && name.matches('^[a-z0-9_-]{3,20}$')
+        && request.resource.data.keys().hasOnly(['uid'])
+        && request.resource.data.uid == request.auth.uid
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.usernameLower == name;
+
+      allow update: if false;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+    }
+
+    match /users/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list: if false;
+
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['username', 'usernameLower', 'email', 'lang', 'createdAt', 'consentAt'])
+        && request.resource.data.username is string
+        && request.resource.data.username.matches('^[A-Za-z0-9_-]{3,20}$')
+        && request.resource.data.usernameLower == request.resource.data.username.lower()
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.lang in ['fr', 'en']
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.consentAt == request.time
+        && getAfter(/databases/$(database)/documents/usernames/$(request.resource.data.usernameLower)).data.uid == uid;
+
+      // Le pseudo ne change pas apres l'inscription (un seul pseudo par compte).
+      allow update: if false;
+      allow delete: if signedIn() && request.auth.uid == uid;
+    }
+
+    // Lettre d'information : inscription anonyme, en ecriture seule.
+    // Personne ne peut lire la liste depuis le site (export via la console).
+    match /newsletter/{email} {
+      allow read, update, delete: if false;
+      allow create: if request.resource.data.keys().hasOnly(['email', 'lang', 'createdAt'])
+        && request.resource.data.email == email
+        && email.size() <= 254
+        && email.matches('^[^\\s@A-Z]+@[^\\s@A-Z]+\\.[^\\s@A-Z]{2,}$')
+        && request.resource.data.lang in ['fr', 'en']
+        && request.resource.data.createdAt == request.time;
+    }
+  }
+}
