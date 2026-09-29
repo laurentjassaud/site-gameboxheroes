@@ -145,7 +145,7 @@ def render(p, *, file, meta_title, meta_desc, top, body, css=(), scripts=(), mod
     p.k('meta.title', *meta_title)
     p.k('meta.description', *meta_desc)
 
-    css_links = '\n'.join(f'<link rel="stylesheet" href="{c}">' for c in ('style.css', *css))
+    css_links = '\n'.join(f'<link rel="stylesheet" href="assets/css/{c}">' for c in ('style.css', *css))
     # i18n_file : fichier de traduction ecrit a la main (sinon genere ici)
     write_i18n = i18n_file is None
     i18n_file = i18n_file or file.replace('.html', '-i18n.js')

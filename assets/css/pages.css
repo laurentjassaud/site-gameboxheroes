@@ -469,10 +469,13 @@ html:not([lang="en"]) .legal--en { display: none; }
   color: inherit;
 }
 
-/* Sommaire colle en haut pendant la lecture */
+/* Sommaire colle en haut pendant la lecture (l'aside s'etire sur toute la
+   hauteur de la grille, le nav y reste accroche) ; defile seul s'il depasse */
 .legal-toc nav {
   position: sticky;
   top: 24px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
 }
 
 .legal-toc__list {
@@ -498,7 +501,7 @@ html:not([lang="en"]) .legal--en { display: none; }
   color: var(--black);
 }
 
-.legal-toc__list a[aria-current] { border-color: var(--red); color: var(--red); }
+.legal-toc__list li[aria-current] a { border-color: var(--red); color: var(--red); }
 
 @media (hover: hover) and (pointer: fine) {
   .legal-toc__list a:hover { color: var(--red); }

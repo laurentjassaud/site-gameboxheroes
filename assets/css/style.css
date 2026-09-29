@@ -59,7 +59,10 @@ body {
   font-size: var(--fs-body);
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  /* clip et non hidden : avec container-type, body ne transmet plus son
+     overflow a la fenetre ; hidden en ferait un conteneur de defilement
+     qui ne defile jamais, ce qui casse tous les position: sticky */
+  overflow-x: clip;
 }
 
 h1, h2, h3, p, ul, ol, figure { margin: 0; padding: 0; }
@@ -399,7 +402,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   flex: none;
   width: max(16px, calc(26 * var(--u)));
   aspect-ratio: 31 / 34;
-  background: url("assets/hex-bullet.svg") center / contain no-repeat;
+  background: url("../hex-bullet.svg") center / contain no-repeat;
 }
 
 .sec-title--plain::before { display: none; }
@@ -740,7 +743,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   gap: calc(16 * var(--u));
   min-height: calc(110 * var(--u));
   background-image:
-    url("assets/home/soldiers.png"),
+    url("../home/soldiers.png"),
     linear-gradient(var(--rule), var(--rule)),
     linear-gradient(var(--rule), var(--rule));
   background-position: right bottom 4px, top left, bottom left;
@@ -979,7 +982,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   /* Le filet du haut ferait doublon avec celui du bas du formulaire */
   .sign {
     min-height: 96px;
-    background-image: url("assets/home/soldiers.png"), linear-gradient(var(--rule), var(--rule));
+    background-image: url("../home/soldiers.png"), linear-gradient(var(--rule), var(--rule));
     background-position: right bottom 4px, bottom left;
     background-size: auto 70%, 100% 4px;
   }

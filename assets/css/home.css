@@ -191,7 +191,6 @@
 .prep__strip {
   display: grid;
   grid-template-columns: 491fr 454fr 471fr 504fr;
-  width: min(100%, var(--max));
   aspect-ratio: 1920 / 624;
   margin-inline: auto;
   list-style: none;

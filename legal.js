@@ -8,7 +8,7 @@
 
   const list = document.querySelector('[data-toc]');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let observer;
+  let items = new Map();
 
   const visibleArticle = () =>
     document.querySelector(document.documentElement.lang === 'en' ? '.legal--en' : '.legal--fr');
@@ -22,18 +22,33 @@
       return `<li class="${cls}"><a href="#${h.id}">${h.textContent}</a></li>`;
     }).join('');
 
-    // Section courante mise en evidence dans le sommaire
-    if (observer) observer.disconnect();
-    if (!('IntersectionObserver' in window)) return;
-    const links = new Map([...list.querySelectorAll('a')].map((a) => [a.hash.slice(1), a]));
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        list.querySelectorAll('a[aria-current]').forEach((a) => a.removeAttribute('aria-current'));
-        links.get(entry.target.id)?.setAttribute('aria-current', 'true');
-      });
-    }, { rootMargin: '0px 0px -70% 0px' });
-    heads.forEach((h) => observer.observe(h));
+    items = new Map([...list.querySelectorAll('li')].map((li) => [li.querySelector('a').hash.slice(1), li]));
+    track();
+  };
+
+  // Section courante : le dernier titre passe au-dessus du tiers haut de
+  // l'ecran. Son <li> recoit aria-current="location" (lu par les lecteurs
+  // d'ecran, et utilise par la CSS pour le surligner).
+  const track = () => {
+    const heads = [...items.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+    if (!heads.length) return;
+    const limit = window.innerHeight * 0.3;
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+    let current = heads[0];
+    if (atBottom) current = heads[heads.length - 1];
+    else heads.forEach((h) => { if (h.getBoundingClientRect().top <= limit) current = h; });
+
+    const li = items.get(current.id);
+    if (li.hasAttribute('aria-current')) return;
+    list.querySelectorAll('li[aria-current]').forEach((el) => el.removeAttribute('aria-current'));
+    li.setAttribute('aria-current', 'location');
+  };
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; track(); });
   };
 
   // #newsletter en anglais -> #newsletter-en (et inversement)
@@ -48,6 +63,8 @@
 
   document.addEventListener('gbh:lang', () => { build(); });
   window.addEventListener('hashchange', () => followHash(true));
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
 
   build();
   requestAnimationFrame(() => followHash(false));
