@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /tools/
+Disallow: /prototype-logo.html
+
+Sitemap: https://www.gameboxheroes.com/sitemap.xml

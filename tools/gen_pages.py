@@ -1,7 +1,7 @@
-# Genere actualites.html et qui-sommes-nous.html (+ leurs fichiers de traduction)
+# Genere actualites.html, qui-sommes-nous.html et boites.html (+ leurs fichiers de traduction)
 # a partir des donnees ci-dessous, avec le gabarit commun tools/layout.py.
 # Usage : python tools/gen_pages.py (depuis n importe quel dossier)
-from layout import Page, topbar, intro, render, CREDIT
+from layout import Page, topbar, intro, render, reel, url, plain, credit, COVERS, SITE, CREDIT
 
 MONTHS_FR = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet',
              'août', 'septembre', 'octobre', 'novembre', 'décembre']
@@ -204,10 +204,22 @@ def build_news():
     </div>
   </div>'''
 
+    def ld(lang):
+        """Donnees structurees : la page est un blog, chaque article un billet."""
+        n = 0 if lang == 'fr' else 1
+        here = url('actualites.html', lang)
+        org = {'@id': f'{SITE}/#organization'}
+        return [{'@type': 'Blog', '@id': f'{here}#blog', 'url': here, 'inLanguage': lang, 'publisher': org,
+                 'blogPost': [{'@type': 'BlogPosting', 'headline': plain(title[n]), 'description': plain(lede[n]),
+                               'datePublished': iso, 'url': f'{here}#{aid}', 'inLanguage': lang, 'author': org}
+                              for aid, iso, _, title, lede, _ in ARTICLES]}]
+
     render(p, file='actualites.html',
-           meta_title=('GameBoxHeroes — Actualités', 'GameBoxHeroes — News'),
-           meta_desc=('Toutes les nouvelles de GameBoxHeroes : modules, tests publics et nouveautés de la plateforme.',
-                      'All the GameBoxHeroes news: modules, public tests and platform updates.'),
+           meta_title=('Actualités : nouveaux modules et tests publics — GameBoxHeroes',
+                       'News: new modules and public tests — GameBoxHeroes'),
+           meta_desc=('Sorties de modules, tests publics d’Arnhem, missions d’Ambush!, nouveautés de la plateforme : toutes les nouvelles du projet GameBoxHeroes.',
+                      'Module releases, Arnhem public tests, Ambush! missions, platform updates: all the GameBoxHeroes project news, newest first.'),
+           page_type='CollectionPage', ld=ld,
            top=top, body=body, css=['roadmap.css', 'pages.css'], scripts=['news.js'],
            body_class='page-news', generator='tools/gen_pages.py')
 
@@ -312,13 +324,62 @@ def build_about():
     p.k('cta.roadmap', 'Voir la road map', 'See the road map')
 
     render(p, file='qui-sommes-nous.html',
-           meta_title=('GameBoxHeroes — Qui sommes-nous', 'GameBoxHeroes — About us'),
-           meta_desc=('GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs. Notre mission, nos principes, notre équipe.',
-                      'GameBoxHeroes adapts classic wargames to play solo or live with others. Our mission, principles and team.'),
+           meta_title=('Qui sommes-nous : le projet GameBoxHeroes',
+                       'About us: the GameBoxHeroes project'),
+           meta_desc=('GameBoxHeroes est un projet personnel et non commercial qui adapte les classiques du wargame pour jouer en solo ou à plusieurs. Mission, principes, équipe.',
+                      'GameBoxHeroes is a personal, non-commercial project adapting classic wargames for solo or multiplayer play. Our mission, our principles, our team.'),
+           page_type='AboutPage',
            top=top, body=body, css=['roadmap.css', 'pages.css'],
            body_class='page-about', generator='tools/gen_pages.py')
 
 
+# ===========================================================================
+#  Page Les boîtes (maquette node 129:237)
+# ===========================================================================
+
+def build_boxes():
+    p = Page()
+    # Carte propre au bandeau de cette page (assets/boites/hero-map.webp)
+    game, rights = 'Europa: Fire in the East', 'GRD'
+    p.k('credit', f'Carte et pions provenant du jeu <strong>{game}</strong><br>'
+                  f'dans un but illustratif uniquement - <strong>Tous droits {rights}</strong>',
+        f'Map and counters from <strong>{game}</strong><br>'
+        f'for illustration only - <strong>All rights {rights}</strong>')
+
+    top = f"""{topbar()}
+{intro(p, ('Les boîtes', 'The boxes'),
+       ('Tous nos projets de boîtes pour l’année 2027.<br>Les jeux, les illustrations et les mécanismes restent <br>la propriété de leurs créateurs et diffuseurs exclusifs',
+        'All our box projects for 2027.<br>The games, artwork and mechanics remain <br>the property of their creators and exclusive publishers'))}
+    {credit(game, rights)}"""
+
+    body = f'''  <section class="reel" aria-labelledby="boxes-title">
+    {p.t('boxes.list', 'Les boîtes en préparation', 'Boxes in the works', tag='h2', cls='sr-only', attrs='id="boxes-title"')}
+{reel(p)}
+  </section>'''
+
+    def ld(lang):
+        """Donnees structurees : liste des jeux, avec editeur et annee."""
+        games = []
+        for i, (src, title, pub, year, _) in enumerate(COVERS, 1):
+            game = {'@type': 'Game', 'name': title, 'image': f'{SITE}/{src}',
+                    'publisher': {'@type': 'Organization', 'name': pub}}
+            if year:
+                game['datePublished'] = year
+            games.append({'@type': 'ListItem', 'position': i, 'item': game})
+        return [{'@type': 'ItemList', '@id': f"{url('boites.html', lang)}#games",
+                 'numberOfItems': len(games), 'itemListElement': games}]
+
+    render(p, file='boites.html',
+           meta_title=('Les boîtes de wargame en préparation — GameBoxHeroes',
+                       'Wargame boxes in the works — GameBoxHeroes'),
+           meta_desc=('Arnhem, Ambush!, Patton’s Best, Carrier, Tokyo Express, Enemy Action: Kharkov… les boîtes de wargame que GameBoxHeroes adapte pour jouer en ligne, en solo ou à deux.',
+                      'Arnhem, Ambush!, Patton’s Best, Carrier, Tokyo Express, Enemy Action: Kharkov… every wargame box GameBoxHeroes is adapting for online play, solo or head-to-head.'),
+           page_type='CollectionPage', ld=ld,
+           top=top, body=body, css=['boites.css'], scripts=['boites.js'],
+           body_class='page-boxes', generator='tools/gen_pages.py')
+
+
 build_news()
 build_about()
+build_boxes()
 print('ok')

@@ -1,8 +1,8 @@
 // Fichier genere par tools/gen_roadmap.py : textes FR / EN de roadmap.html.
 window.GBH_I18N = {
   "fr": {
-    "meta.title": "GameBoxHeroes — Road Map 2026",
-    "meta.description": "Les 24 prochaines étapes de GameBoxHeroes : nouveaux modules, sauvegarde des parties, classement des joueurs, aide au jeu solo.",
+    "meta.title": "Road map 2026 : modules et fonctions à venir — GameBoxHeroes",
+    "meta.description": "Les 24 prochaines étapes de GameBoxHeroes en 2026 : nouveaux modules de wargame, sauvegarde des parties, classement des joueurs et aide au jeu solo.",
     "rm.label": "Road Map",
     "rm.text": "24 points à venir en 2026&nbsp;: nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!<br>Les dates sont indicatives et évolueront avec vos retours.",
     "rm.stats": "Chiffres clés",
@@ -10,6 +10,7 @@ window.GBH_I18N = {
     "rm.all": "Tout",
     "rm.count.one": "{n} point affiché",
     "rm.count.other": "{n} points affichés",
+    "rm.count.all": "24 points affichés",
     "stat.total": "Points à venir d’ici fin 2026",
     "stat.modules": "Chantiers modules et missions",
     "stat.progress": "Déjà en cours de développement",
@@ -80,8 +81,8 @@ window.GBH_I18N = {
     "pg.sub": "24 points à venir en 2026&nbsp;: nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!<br>Les dates sont indicatives et évolueront avec vos retours."
   },
   "en": {
-    "meta.title": "GameBoxHeroes — 2026 Road Map",
-    "meta.description": "GameBoxHeroes’ next 24 milestones: new modules, game saving, player rankings, solo play aids.",
+    "meta.title": "2026 road map: upcoming modules and features — GameBoxHeroes",
+    "meta.description": "GameBoxHeroes’ next 24 milestones for 2026: new wargame modules, game saving, player rankings, solo play aids and new Ambush! missions.",
     "rm.label": "Road Map",
     "rm.text": "24 milestones coming in 2026: new modules, game saving, player rankings, solo play aids, new Ambush! missions.<br>Dates are indicative and will evolve with your feedback.",
     "rm.stats": "Key figures",
@@ -89,6 +90,7 @@ window.GBH_I18N = {
     "rm.all": "All",
     "rm.count.one": "{n} milestone shown",
     "rm.count.other": "{n} milestones shown",
+    "rm.count.all": "24 milestones shown",
     "stat.total": "Milestones before the end of 2026",
     "stat.modules": "Module and mission projects",
     "stat.progress": "Already in development",

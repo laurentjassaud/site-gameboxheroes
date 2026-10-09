@@ -43,8 +43,8 @@ window.GBH_I18N = {
     "a6.p2": "Pour en savoir plus sur le projet et l’équipe, rendez-vous sur la page <a href=\"qui-sommes-nous.html\">Qui sommes-nous</a>.",
     "a6.title": "GameBoxHeroes se lance",
     "a6.lede": "Un projet d’adaptation des classiques du wargame, pour jouer en solo ou en direct à plusieurs.",
-    "meta.title": "GameBoxHeroes — Actualités",
-    "meta.description": "Toutes les nouvelles de GameBoxHeroes : modules, tests publics et nouveautés de la plateforme."
+    "meta.title": "Actualités : nouveaux modules et tests publics — GameBoxHeroes",
+    "meta.description": "Sorties de modules, tests publics d’Arnhem, missions d’Ambush!, nouveautés de la plateforme : toutes les nouvelles du projet GameBoxHeroes."
   },
   "en": {
     "cat.modules": "Modules",
@@ -89,7 +89,7 @@ window.GBH_I18N = {
     "a6.p2": "To learn more about the project and the team, visit the <a href=\"qui-sommes-nous.html\">About us</a> page.",
     "a6.title": "GameBoxHeroes is launching",
     "a6.lede": "A project adapting classic wargames to play solo or live with others.",
-    "meta.title": "GameBoxHeroes — News",
-    "meta.description": "All the GameBoxHeroes news: modules, public tests and platform updates."
+    "meta.title": "News: new modules and public tests — GameBoxHeroes",
+    "meta.description": "Module releases, Arnhem public tests, Ambush! missions, platform updates: all the GameBoxHeroes project news, newest first."
   }
 };

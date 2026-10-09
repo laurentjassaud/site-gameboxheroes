@@ -49,8 +49,8 @@ window.GBH_I18N = {
     "cta.text": "Testeurs, joueurs, auteurs de variantes&nbsp;: la plateforme se construit avec vous.",
     "cta.contact": "Nous écrire",
     "cta.roadmap": "Voir la road map",
-    "meta.title": "GameBoxHeroes — Qui sommes-nous",
-    "meta.description": "GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs. Notre mission, nos principes, notre équipe."
+    "meta.title": "Qui sommes-nous : le projet GameBoxHeroes",
+    "meta.description": "GameBoxHeroes est un projet personnel et non commercial qui adapte les classiques du wargame pour jouer en solo ou à plusieurs. Mission, principes, équipe."
   },
   "en": {
     "pg.title": "About us",
@@ -101,7 +101,7 @@ window.GBH_I18N = {
     "cta.text": "Testers, players, variant designers: the platform is being built with you.",
     "cta.contact": "Write to us",
     "cta.roadmap": "See the road map",
-    "meta.title": "GameBoxHeroes — About us",
-    "meta.description": "GameBoxHeroes adapts classic wargames to play solo or live with others. Our mission, principles and team."
+    "meta.title": "About us: the GameBoxHeroes project",
+    "meta.description": "GameBoxHeroes is a personal, non-commercial project adapting classic wargames for solo or multiplayer play. Our mission, our principles, our team."
   }
 };

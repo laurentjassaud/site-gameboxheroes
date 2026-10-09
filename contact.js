@@ -133,7 +133,8 @@
         body: new FormData(form),
         headers: { Accept: 'application/json' }
       });
-      const data = await response.json();
+      // Une erreur serveur peut renvoyer autre chose que du JSON
+      const data = await response.json().catch(() => ({ ok: false, error: 'send_failed' }));
 
       if (data.ok) {
         form.reset();

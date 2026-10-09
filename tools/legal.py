@@ -19,19 +19,19 @@ LEGAL_FR = f'''      <p class="legal__updated">Dernière mise à jour&nbsp;: {UP
 
       <h3 id="editeur">1. Éditeur du site</h3>
       <ul>
-        <li><strong>Nom / raison sociale&nbsp;:</strong> {todo('Votre nom, ou dénomination sociale si société')}</li>
-        <li><strong>Statut&nbsp;:</strong> {todo('Particulier / Entrepreneur individuel / Micro-entrepreneur / SASU…')}</li>
-        <li><strong>N° SIREN / SIRET&nbsp;:</strong> {todo('si applicable')}</li>
-        <li><strong>Adresse&nbsp;:</strong> {todo('Adresse postale ou siège social')}</li>
-        <li><strong>Contact&nbsp;:</strong> {todo('Adresse e-mail de contact')} ou via la page <a href="contact.html">Contact</a></li>
-        <li><strong>Directeur de la publication&nbsp;:</strong> {todo('Nom')}</li>
+        <li><strong>Nom / raison sociale&nbsp;: </strong>Laurent Jassaud</li>
+        <li><strong>Statut&nbsp;: </strong>Particulier</li>
+        <li><strong>N° SIREN / SIRET&nbsp;: </strong>Non applicable</li>
+        <li><strong>Adresse&nbsp;: </strong>17 rue des Veaux - 67000 Strasbourg FRANCE</li>
+        <li><strong>Contact&nbsp;: </strong>contact@gameboxheroes.com ou via la page <a href="contact.html">Contact</a></li>
+        <li><strong>Directeur de la publication&nbsp;: </strong>Laurent Jassaud</li>
       </ul>
 
       <h3 id="hebergement">2. Hébergement</h3>
       <ul>
-        <li><strong>Hébergeur du site&nbsp;:</strong> {todo('Nom de l’hébergeur, ex. OVH, IONOS…')}</li>
-        <li><strong>Adresse&nbsp;:</strong> {todo('Adresse de l’hébergeur')}</li>
-        <li><strong>Contact&nbsp;:</strong> {todo('Téléphone / site web de l’hébergeur')}</li>
+        <li><strong>Hébergeur du site&nbsp;: </strong>Diatem</li>
+        <li><strong>Adresse&nbsp;:</strong> Espace Européen de l’Entreprise, 2 rue de Dublin - 67300 Schiltigheim FRANCE</li>
+        <li><strong>Contact&nbsp;:</strong> +33 (0)3 88 22 74 20 / www.diatem.net</li>
       </ul>
       <p>Les comptes joueurs et la lettre d’information reposent sur <strong>Firebase</strong> (Firebase Authentication et Cloud Firestore), service fourni par Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlande.</p>
 
@@ -47,10 +47,10 @@ LEGAL_FR = f'''      <p class="legal__updated">Dernière mise à jour&nbsp;: {UP
       <p>Les présentes mentions légales sont soumises au droit français. En cas de litige et à défaut de résolution amiable, les tribunaux français seront seuls compétents.</p>
 
       <h2 class="legal__part" id="confidentialite">Politique de confidentialité</h2>
-      <p>GameBoxHeroes («&nbsp;nous&nbsp;», «&nbsp;le site&nbsp;») attache une grande importance à la protection de vos données personnelles. Cette politique explique quelles données sont collectées, pourquoi, et comment vous pouvez exercer vos droits, conformément au Règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés.</p>
+      <p>GameBoxHeroes attache une grande importance à la protection de vos données personnelles. Cette politique explique quelles données sont collectées, pourquoi, et comment vous pouvez exercer vos droits, conformément au Règlement général sur la protection des données (RGPD) et à la loi Informatique et Libertés.</p>
 
       <h3 id="responsable">1. Responsable du traitement</h3>
-      <p>{todo('Votre nom / raison sociale')}, joignable à l’adresse {todo('e-mail de contact')}, est responsable du traitement des données collectées sur ce site.</p>
+      <p>Laurent Jassaud, joignable à l’adresse contact@gameboxheroes.com, est responsable du traitement des données collectées sur ce site.</p>
 
       <h3 id="donnees">2. Données collectées et finalités</h3>
 
@@ -84,7 +84,7 @@ LEGAL_FR = f'''      <p class="legal__updated">Dernière mise à jour&nbsp;: {UP
       <ul>
         <li><strong>Finalités&nbsp;:</strong> création et gestion de votre compte, authentification, sauvegarde de votre progression entre vos sessions et vos appareils, accès aux fonctionnalités multijoueur, sécurité du service (prévention des abus et des doublons de pseudo ou d’e-mail).</li>
         <li><strong>Base légale&nbsp;:</strong> exécution du service que vous avez demandé (article 6.1.b du RGPD)&nbsp;; intérêt légitime pour la sécurité du service.</li>
-        <li><strong>Durée de conservation&nbsp;:</strong> pendant toute la durée de vie du compte. Vous pouvez supprimer votre compte à tout moment depuis le bouton compte en haut de chaque page («&nbsp;Supprimer mon compte&nbsp;»)&nbsp;: votre profil, votre pseudo, votre adresse e-mail et vos données de jeu sont alors effacés immédiatement et définitivement. Un compte inactif est supprimé {todo('délai à préciser, ex. 3 ans')} après la dernière connexion, après un e-mail d’avertissement.</li>
+        <li><strong>Durée de conservation&nbsp;:</strong> pendant toute la durée de vie du compte. Vous pouvez supprimer votre compte à tout moment depuis le bouton compte en haut de chaque page («&nbsp;Supprimer mon compte&nbsp;»)&nbsp;: votre profil, votre pseudo, votre adresse e-mail et vos données de jeu sont alors effacés immédiatement et définitivement. Un compte inactif est supprimé dans un delai de 3 ans après la dernière connexion, après un e-mail d’avertissement.</li>
       </ul>
 
       <h4 id="journaux">d) Données techniques</h4>
@@ -93,9 +93,8 @@ LEGAL_FR = f'''      <p class="legal__updated">Dernière mise à jour&nbsp;: {UP
       <h3 id="destinataires">3. Destinataires des données</h3>
       <p>Vos données ne sont ni vendues, ni cédées à des tiers à des fins commerciales. Elles sont accessibles uniquement à l’éditeur et aux prestataires techniques strictement nécessaires au fonctionnement du site, agissant en qualité de sous-traitants&nbsp;:</p>
       <ul>
-        <li>l’hébergeur du site ({todo('nom de l’hébergeur')})&nbsp;;</li>
-        <li><strong>Google Ireland Limited (Firebase)</strong>, pour l’authentification, la base de données des comptes et des inscriptions à la lettre d’information, et l’envoi des e-mails de vérification et de réinitialisation de mot de passe. Les données sont hébergées dans la région {todo('région Firestore choisie, ex. europe-west1 (Belgique)')}. Certaines opérations peuvent impliquer un transfert vers Google LLC aux États-Unis&nbsp;; ce transfert est encadré par le cadre de protection des données UE–États-Unis (Data Privacy Framework) et par les clauses contractuelles types de la Commission européenne&nbsp;;</li>
-        <li>{todo('le cas échéant : outil d’envoi de la lettre d’information (Brevo, Mailchimp…) et garanties de transfert s’il est hébergé hors UE')}.</li>
+        <li>l’hébergeur du site Diatem;</li>
+        <li><strong>Google Ireland Limited (Firebase)</strong>, pour l’authentification, la base de données des comptes et des inscriptions à la lettre d’information, et l’envoi des e-mails de vérification et de réinitialisation de mot de passe. Les données sont hébergées dans la région Europe-west1 (Belgique). Certaines opérations peuvent impliquer un transfert vers Google LLC aux États-Unis&nbsp;; ce transfert est encadré par le cadre de protection des données UE–États-Unis (Data Privacy Framework) et par les clauses contractuelles types de la Commission européenne&nbsp;;</li>
       </ul>
       <p>Seul votre pseudo est visible des autres joueurs.</p>
 
@@ -108,13 +107,13 @@ LEGAL_FR = f'''      <p class="legal__updated">Dernière mise à jour&nbsp;: {UP
         <li>enregistrer votre progression de jeu et vos préférences directement sur votre appareil.</li>
       </ul>
       <p>Ces éléments ne servent pas à vous suivre et ne nécessitent pas votre consentement préalable, conformément aux lignes directrices de la CNIL sur les traceurs strictement nécessaires.</p>
-      <p>Les polices de caractères du site sont chargées depuis le service Google Fonts&nbsp;: à cette occasion, votre adresse IP est transmise à Google. {todo('Supprimer cette phrase si les polices sont hébergées directement sur le site.')}</p>
+      <p>Les polices de caractères du site sont chargées depuis le service Google Fonts&nbsp;: à cette occasion, votre adresse IP est transmise à Google.</p>
 
       <h3 id="droits">5. Vos droits</h3>
       <p>Conformément au RGPD, vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation, d’opposition et de portabilité sur vos données, ainsi que du droit de retirer votre consentement à tout moment pour les traitements qui en dépendent (lettre d’information).</p>
       <ul>
         <li><strong>Effacement&nbsp;:</strong> vous pouvez supprimer vous-même votre compte à tout moment, depuis le bouton compte en haut de page.</li>
-        <li><strong>Accès, rectification, portabilité&nbsp;:</strong> écrivez-nous à l’adresse {todo('e-mail de contact')} ou depuis la page <a href="contact.html">Contact</a>. Le pseudo ne pouvant pas être modifié depuis le site, nous pouvons le corriger sur demande.</li>
+        <li><strong>Accès, rectification, portabilité&nbsp;:</strong> écrivez-nous à l’adresse contact@gameboxheroes.com ou depuis la page <a href="contact.html">Contact</a>. Le pseudo ne pouvant pas être modifié depuis le site, nous pouvons le corriger sur demande.</li>
       </ul>
       <p>Nous répondons dans un délai d’un mois. Vous disposez également du droit d’introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" rel="noopener" target="_blank">www.cnil.fr</a>) si vous estimez que vos droits ne sont pas respectés.</p>
 
@@ -136,19 +135,19 @@ LEGAL_EN = f'''      <p class="legal__updated">Last updated: {UPDATED_EN}</p>
 
       <h3 id="editeur-en">1. Publisher</h3>
       <ul>
-        <li><strong>Name / company name:</strong> {todo('Your name, or company name')}</li>
-        <li><strong>Status:</strong> {todo('Individual / sole trader / company…')}</li>
-        <li><strong>SIREN / SIRET no.:</strong> {todo('if applicable')}</li>
-        <li><strong>Address:</strong> {todo('Postal address or registered office')}</li>
-        <li><strong>Contact:</strong> {todo('Contact email')} or through the <a href="contact.html">Contact</a> page</li>
-        <li><strong>Publication director:</strong> {todo('Name')}</li>
+        <li><strong>Name / company name:</strong> Laurent Jassaud</li>
+        <li><strong>Status:</strong> Private individual</li>
+        <li><strong>SIREN / SIRET no.:</strong> Not applicable</li>
+        <li><strong>Address:</strong> 17 rue des Veaux - 67000 Strasbourg FRANCE</li>
+        <li><strong>Contact:</strong> contact@gameboxheroes.com or through the <a href="contact.html">Contact</a> page</li>
+        <li><strong>Publication director:</strong> Laurent Jassaud</li>
       </ul>
 
       <h3 id="hebergement-en">2. Hosting</h3>
       <ul>
-        <li><strong>Website host:</strong> {todo('Host name, e.g. OVH, IONOS…')}</li>
-        <li><strong>Address:</strong> {todo('Host address')}</li>
-        <li><strong>Contact:</strong> {todo('Host phone / website')}</li>
+        <li><strong>Website host:</strong> Diatem</li>
+        <li><strong>Address:</strong> Espace Européen de l’Entreprise, 2 rue de Dublin - 67300 Schiltigheim FRANCE</li>
+        <li><strong>Contact:</strong> +33 (0)3 88 22 74 20 / www.diatem.net</li>
       </ul>
       <p>Player accounts and the newsletter run on <strong>Firebase</strong> (Firebase Authentication and Cloud Firestore), provided by Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.</p>
 
@@ -164,10 +163,10 @@ LEGAL_EN = f'''      <p class="legal__updated">Last updated: {UPDATED_EN}</p>
       <p>This legal notice is governed by French law. In the event of a dispute, and failing an amicable settlement, the French courts have sole jurisdiction.</p>
 
       <h2 class="legal__part" id="confidentialite-en">Privacy policy</h2>
-      <p>GameBoxHeroes (“we”, “the site”) takes the protection of your personal data seriously. This policy explains what data is collected, why, and how you can exercise your rights, in accordance with the General Data Protection Regulation (GDPR) and the French Data Protection Act.</p>
+      <p>GameBoxHeroes takes the protection of your personal data seriously. This policy explains what data is collected, why, and how you can exercise your rights, in accordance with the General Data Protection Regulation (GDPR) and the French Data Protection Act.</p>
 
       <h3 id="responsable-en">1. Data controller</h3>
-      <p>{todo('Your name / company name')}, reachable at {todo('contact email')}, is the controller of the data collected on this site.</p>
+      <p>Laurent Jassaud, reachable at contact@gameboxheroes.com, is the controller of the data collected on this site.</p>
 
       <h3 id="donnees-en">2. Data collected and purposes</h3>
 
@@ -201,7 +200,7 @@ LEGAL_EN = f'''      <p class="legal__updated">Last updated: {UPDATED_EN}</p>
       <ul>
         <li><strong>Purposes:</strong> creating and managing your account, authentication, saving your progress across sessions and devices, multiplayer features, service security (preventing abuse and duplicate usernames or emails).</li>
         <li><strong>Legal basis:</strong> performance of the service you requested (GDPR article 6.1.b); legitimate interest for service security.</li>
-        <li><strong>Retention:</strong> for as long as the account exists. You can delete your account at any time from the account button at the top of every page (“Delete my account”): your profile, username, email address and game data are then erased immediately and permanently. Inactive accounts are deleted {todo('period to specify, e.g. 3 years')} after the last sign-in, following a warning email.</li>
+        <li><strong>Retention:</strong> for as long as the account exists. You can delete your account at any time from the account button at the top of every page (“Delete my account”): your profile, username, email address and game data are then erased immediately and permanently. Inactive accounts are deleted within 3 years after the last sign-in, following a warning email.</li>
       </ul>
 
       <h4 id="journaux-en">d) Technical data</h4>
@@ -210,9 +209,8 @@ LEGAL_EN = f'''      <p class="legal__updated">Last updated: {UPDATED_EN}</p>
       <h3 id="destinataires-en">3. Recipients</h3>
       <p>Your data is never sold or shared with third parties for commercial purposes. It is only accessible to the publisher and to the technical providers strictly needed to run the site, acting as processors:</p>
       <ul>
-        <li>the website host ({todo('host name')});</li>
-        <li><strong>Google Ireland Limited (Firebase)</strong>, for authentication, the database of accounts and newsletter sign-ups, and sending verification and password reset emails. Data is hosted in the {todo('chosen Firestore region, e.g. europe-west1 (Belgium)')} region. Some operations may involve a transfer to Google LLC in the United States; this transfer is covered by the EU–US Data Privacy Framework and the European Commission’s standard contractual clauses;</li>
-        <li>{todo('if applicable: newsletter tool (Brevo, Mailchimp…) and transfer safeguards if hosted outside the EU')}.</li>
+        <li>the website host, Diatem;</li>
+        <li><strong>Google Ireland Limited (Firebase)</strong>, for authentication, the database of accounts and newsletter sign-ups, and sending verification and password reset emails. Data is hosted in the europe-west1 (Belgium) region. Some operations may involve a transfer to Google LLC in the United States; this transfer is covered by the EU–US Data Privacy Framework and the European Commission’s standard contractual clauses;</li>
       </ul>
       <p>Only your username is visible to other players.</p>
 
@@ -225,13 +223,13 @@ LEGAL_EN = f'''      <p class="legal__updated">Last updated: {UPDATED_EN}</p>
         <li>saving your game progress and preferences directly on your device.</li>
       </ul>
       <p>These items are not used to track you and do not require your prior consent, in line with the CNIL guidelines on strictly necessary trackers.</p>
-      <p>The site’s fonts are loaded from Google Fonts: in doing so, your IP address is sent to Google. {todo('Remove this sentence if the fonts are self-hosted.')}</p>
+      <p>The site’s fonts are loaded from Google Fonts: in doing so, your IP address is sent to Google.</p>
 
       <h3 id="droits-en">5. Your rights</h3>
       <p>Under the GDPR, you have the right to access, rectify, erase, restrict, object to and port your data, and to withdraw your consent at any time for processing based on it (newsletter).</p>
       <ul>
         <li><strong>Erasure:</strong> you can delete your account yourself at any time, from the account button at the top of the page.</li>
-        <li><strong>Access, rectification, portability:</strong> write to {todo('contact email')} or use the <a href="contact.html">Contact</a> page. Usernames cannot be changed from the site, but we can correct yours on request.</li>
+        <li><strong>Access, rectification, portability:</strong> write to contact@gameboxheroes.com or use the <a href="contact.html">Contact</a> page. Usernames cannot be changed from the site, but we can correct yours on request.</li>
       </ul>
       <p>We reply within one month. You also have the right to lodge a complaint with the CNIL, the French data protection authority (<a href="https://www.cnil.fr" rel="noopener" target="_blank">www.cnil.fr</a>), if you believe your rights are not being respected.</p>
 

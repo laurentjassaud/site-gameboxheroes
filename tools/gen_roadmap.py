@@ -158,9 +158,11 @@ def key(k, f, e):
 
 
 # ---------- Textes de page ----------
-key("meta.title", "GameBoxHeroes — Road Map 2026", "GameBoxHeroes — 2026 Road Map")
-key("meta.description", "Les 24 prochaines étapes de GameBoxHeroes&nbsp;: nouveaux modules, sauvegarde des parties, classement des joueurs, aide au jeu solo.".replace("&nbsp;", "\u00a0"),
-    "GameBoxHeroes’ next 24 milestones: new modules, game saving, player rankings, solo play aids.")
+key("meta.title", "Road map 2026 : modules et fonctions à venir — GameBoxHeroes",
+    "2026 road map: upcoming modules and features — GameBoxHeroes")
+key("meta.description",
+    "Les 24 prochaines étapes de GameBoxHeroes en 2026 : nouveaux modules de wargame, sauvegarde des parties, classement des joueurs et aide au jeu solo.",
+    "GameBoxHeroes’ next 24 milestones for 2026: new wargame modules, game saving, player rankings, solo play aids and new Ambush! missions.")
 key("rm.label", "Road Map", "Road Map")
 key("rm.text",
     "24 points à venir en 2026&nbsp;: nouveaux modules, mémorisation des parties, classement des joueurs, aide pour les modules solo, nouvelles missions Ambush!<br>Les dates sont indicatives et évolueront avec vos retours.",
@@ -170,6 +172,8 @@ key("rm.filters", "Filtrer par thème", "Filter by theme")
 key("rm.all", "Tout", "All")
 key("rm.count.one", "{n} point affiché", "{n} milestone shown")
 key("rm.count.other", "{n} points affichés", "{n} milestones shown")
+# Compteur tel qu'ecrit dans le HTML, avant que roadmap.js ne le tienne a jour
+key("rm.count.all", f"{len(ITEMS)} points affichés", f"{len(ITEMS)} milestones shown")
 
 n_modules = sum(1 for i in ITEMS if i[1] == "modules")
 n_progress = sum(1 for i in ITEMS if i[2] == "progress")
@@ -255,7 +259,7 @@ body = f"""  <div class="wrap page-body">
       <div class="chips" role="group" data-i18n-attr="aria-label:rm.filters" aria-label="Filtrer par thème">
 {filters_html()}
       </div>
-      <p class="rm-count" aria-live="polite">24 points affichés</p>
+      <p class="rm-count" aria-live="polite" data-i18n="rm.count.all">24 points affichés</p>
     </div>
 
 {quarters_html()}

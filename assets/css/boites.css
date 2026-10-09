@@ -1,0 +1,175 @@
+/* ==========================================================================
+   Les boîtes — toutes les boites sur une ligne horizontale qui defile
+   (principe et animations repris de mschristensen.com, voir boites.js).
+   Chaque boite : titre au-dessus, couverture, editeur + annee en dessous.
+   ========================================================================== */
+
+/* Carte en fond du bandeau, sur un pseudo-element comme sur l'accueil ;
+   l'image est deja fondue a gauche, derriere le titre */
+.page-boxes .top > .wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-boxes .top > .wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("../boites/hero-map.webp") center / cover no-repeat;
+  pointer-events: none;
+}
+
+.reel {
+  /* Largeur d'une boite : 28 % de la page, sans que la couverture (3:4)
+     depasse la moitie de la hauteur d'ecran */
+  --reel-w: min(28cqw, 37.5svh);
+  /* power2.out de GSAP, la courbe des apparitions du site modele */
+  --reel-ease: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  padding-block: calc(56 * var(--u)) calc(24 * var(--u));
+  /* Sans script : defilement horizontal natif */
+  overflow-x: auto;
+}
+
+.reel__track {
+  display: flex;
+  align-items: flex-end;
+  width: max-content;
+  list-style: none;
+}
+
+.reel__item {
+  flex: none;
+  width: var(--reel-w);
+}
+
+.reel__link {
+  display: block;
+  outline-offset: -4px;
+}
+
+.reel__title {
+  /* Largeur fixe : le titre ne se recoupe pas quand la boite s'etire */
+  width: calc(var(--reel-w) * 0.86);
+  padding-bottom: 0.12em;
+  margin-bottom: max(10px, calc(20 * var(--u)));
+  font-family: var(--font-display);
+  font-size: max(20px, calc(38 * var(--u)));
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  /* Masque de l'apparition du titre */
+  overflow: hidden;
+}
+
+.reel__line { display: block; }
+
+.reel__visual {
+  position: relative;
+  display: block;
+  height: calc(var(--reel-w) / 0.75);
+  overflow: hidden;
+  background: var(--grey);
+}
+
+/* Couverture plus large que son cadre : la marge sert a la parallaxe */
+.reel__visual img {
+  position: absolute;
+  top: 0;
+  left: -28px;
+  width: calc(100% + 56px);
+  max-width: none;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.reel__meta {
+  display: block;
+  width: calc(var(--reel-w) * 0.86);
+  margin-top: max(10px, calc(18 * var(--u)));
+  font-size: max(14px, calc(17 * var(--u)));
+  line-height: 1.3;
+}
+
+.reel__meta span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reel__pub { font-weight: 600; }
+.reel__year { color: var(--muted); }
+
+/* ---------- Bande animee par boites.js ---------- */
+
+.reel.is-live {
+  overflow: hidden;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.reel.is-live .reel__track { will-change: transform; }
+.reel.is-live .reel__item { width: var(--reel-live, var(--reel-w)); }
+.reel.is-live .reel__visual img { will-change: transform; }
+.reel.is-live img { -webkit-user-drag: none; }
+
+/* ---------- Survol : meme principe que le bandeau de l'accueil ---------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .reel__visual img { opacity: 0.5; filter: grayscale(1); }
+
+  .reel__link:hover .reel__visual img,
+  .reel__link:focus-visible .reel__visual img {
+    opacity: 1;
+    filter: none;
+  }
+
+  .reel__link:hover .prep__sticker,
+  .reel__link:focus-visible .prep__sticker {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Apparition au chargement ----------
+   Par boite visible, de gauche a droite (--i, pose par boites.js), 0,14 s
+   d'ecart : la couverture se deplie depuis le bas, le titre monte dans son
+   masque, puis l'editeur et l'annee arrivent flous. */
+
+.reel__item[data-enter] .reel__visual {
+  transform-origin: center bottom;
+  animation: reel-unfold 0.75s var(--reel-ease) calc(var(--i) * 0.14s) both;
+}
+
+.reel__item[data-enter] .reel__line {
+  transform-origin: 0 10%;
+  animation: reel-line 0.8s var(--reel-ease) calc(var(--i) * 0.14s + 0.16s) both;
+}
+
+.reel__item[data-enter] .reel__meta span {
+  animation: reel-rise 0.4s var(--reel-ease) calc(var(--i) * 0.14s + 0.56s) both;
+}
+
+.reel__item[data-enter] .reel__meta span + span { animation-delay: calc(var(--i) * 0.14s + 0.68s); }
+
+@keyframes reel-unfold { from { transform: scaleY(0); } }
+@keyframes reel-line { from { transform: translateY(100%) rotate(10deg); } }
+@keyframes reel-rise { from { opacity: 0; transform: translateY(20px); filter: blur(10px); } }
+
+/* Moins d'animations demandees : boites.js ne demarre pas, donc ni defilement
+   automatique ni apparition ; la bande se fait defiler a la main. */
+
+/* ---------- Tablette / mobile ---------- */
+
+@media (max-width: 900px) {
+  .reel {
+    --reel-w: min(78cqw, 41svh);
+    padding-block: 28px 8px;
+  }
+}

@@ -21,7 +21,7 @@
       'menu.open': 'Ouvrir le menu',
       'menu.close': 'Fermer le menu',
       'menu.label': 'Menu principal',
-      'menu.modules': 'Modules',
+      'menu.boxes': 'Les boîtes',
       'menu.news': 'Actualités',
       'menu.roadmap': 'Road Map',
       'menu.about': 'Qui sommes-nous',
@@ -96,7 +96,7 @@
       'menu.open': 'Open menu',
       'menu.close': 'Close menu',
       'menu.label': 'Main menu',
-      'menu.modules': 'Modules',
+      'menu.boxes': 'The boxes',
       'menu.news': 'News',
       'menu.roadmap': 'Road Map',
       'menu.about': 'About us',
@@ -169,25 +169,10 @@
   const pageTranslations = window.GBH_I18N || {};
   Object.keys(translations).forEach((lang) => Object.assign(translations[lang], pageTranslations[lang]));
 
-  const STORAGE_KEY = 'gbh-lang';
-
-  const readStoredLang = () => {
-    try { return localStorage.getItem(STORAGE_KEY); } catch { return null; }
-  };
-
-  const storeLang = (lang) => {
-    try { localStorage.setItem(STORAGE_KEY, lang); } catch { /* stockage indisponible */ }
-  };
-
-  const detectLang = () => {
-    const fromUrl = new URLSearchParams(location.search).get('lang');
-    if (fromUrl && translations[fromUrl]) return fromUrl;
-    const stored = readStoredLang();
-    if (stored && translations[stored]) return stored;
-    return (navigator.language || 'fr').toLowerCase().startsWith('fr') ? 'fr' : 'en';
-  };
-
-  let currentLang = detectLang();
+  // Une page par langue : le francais a la racine, l'anglais dans en/. La
+  // langue est celle du fichier charge (<html lang>), on en change par les
+  // liens FR / EN du menu.
+  const currentLang = document.documentElement.lang === 'en' ? 'en' : 'fr';
 
   // Acces aux traductions pour les modules (account.js, compte.js, newsletter.js)
   window.GBH_T = (key) => {
@@ -195,10 +180,10 @@
     return value == null ? key : value;
   };
 
+  // Le HTML est deja dans la bonne langue ; on repasse le dictionnaire pour
+  // les textes ecrits par les scripts et on previent les pages (gbh:lang).
   const applyLang = (lang) => {
     const dict = translations[lang];
-
-    document.documentElement.lang = lang;
 
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const value = dict[el.dataset.i18n];
@@ -218,36 +203,10 @@
       });
     });
 
-    document.querySelectorAll('.lang__btn').forEach((btn) => {
-      btn.setAttribute('aria-pressed', String(btn.dataset.lang === lang));
-    });
-
     document.dispatchEvent(new CustomEvent('gbh:lang', { detail: { lang, dict } }));
   };
 
   applyLang(currentLang);
-
-  const switchLang = (lang) => {
-    if (lang === currentLang || !translations[lang]) return;
-    currentLang = lang;
-    storeLang(lang);
-
-    if (reduceMotion) {
-      applyLang(lang);
-      return;
-    }
-
-    // Fondu sortant, echange du texte, fondu entrant
-    document.body.classList.add('is-switching');
-    setTimeout(() => {
-      applyLang(lang);
-      requestAnimationFrame(() => document.body.classList.remove('is-switching'));
-    }, 180);
-  };
-
-  document.querySelectorAll('.lang__btn').forEach((btn) => {
-    btn.addEventListener('click', () => switchLang(btn.dataset.lang));
-  });
 
   /* ---------------------------------------------------------------------
      Menu lateral

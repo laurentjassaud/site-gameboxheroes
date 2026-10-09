@@ -98,7 +98,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* Filet gris (4 px) au-dessus d'un bloc */
 .ruled {
-  padding-top: calc(4px + 22 * var(--u));
+  padding-top: calc(4px + 40 * var(--u));
   background: linear-gradient(var(--rule), var(--rule)) top left / 100% 4px no-repeat;
 }
 
@@ -132,22 +132,52 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   flex: none;
   width: max(64px, calc(139 * var(--u)));
   aspect-ratio: 139 / 156;
-  transition: transform 0.5s var(--ease-out);
 }
 
-.brand__logo img { position: absolute; }
-.brand__logo-hex { inset: 0; width: 100%; height: 100%; }
+.brand__logo svg { display: block; width: 100%; height: 100%; }
 
-/* Texte "Game Box Heroes" (77.6 x 55) place dans l'hexagone */
-.brand__logo-text {
-  left: 8.63%;
-  top: 30.17%;
-  width: 55.83%;
-  height: 35.25%;
+/* Logo anime : monogramme GBH au repos, nom "Game Box Heroes" au survol.
+   L'hexagone ne bouge pas. Le monogramme s'ecarte vers les quatre coins, les
+   lettres montent en cascade (--i = rang du trace, pose par tools/layout.py).
+   La regle de l'etat d'arrivee porte la transition d'entree (lente, en
+   cascade) ; celle de l'etat quitte porte la sortie (courte, sans delai). */
+.brand__logo-mark path,
+.brand__logo-name path {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.brand__logo-mark path {
+  transition:
+    transform 0.84s var(--ease-out) calc(0.16s + var(--i) * 0.08s),
+    opacity 0.84s var(--ease-out) calc(0.16s + var(--i) * 0.08s);
+}
+
+.brand__logo-name path {
+  opacity: 0;
+  transform: translateY(5px);
+  transition: transform 0.28s var(--ease-out), opacity 0.28s var(--ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .brand__logo:hover { transform: rotate(-4deg) scale(1.03); }
+  .brand__logo:hover .brand__logo-mark path {
+    opacity: 0;
+    transition: transform 0.4s var(--ease-out), opacity 0.4s var(--ease-out);
+  }
+
+  /* Le groupe du monogramme est agrandi 2,14 fois : 4.2px y valent 9 unites */
+  .brand__logo:hover .brand__logo-mark path:nth-child(1) { transform: translate(4.2px, -4.2px) scale(0.9); }
+  .brand__logo:hover .brand__logo-mark path:nth-child(2) { transform: translate(-4.2px, -4.2px) scale(0.9); }
+  .brand__logo:hover .brand__logo-mark path:nth-child(3) { transform: translate(4.2px, 4.2px) scale(0.9); }
+  .brand__logo:hover .brand__logo-mark path:nth-child(4) { transform: translate(-4.2px, 4.2px) scale(0.9); }
+
+  .brand__logo:hover .brand__logo-name path {
+    opacity: 1;
+    transform: none;
+    transition:
+      transform 0.72s var(--ease-out) calc(0.18s + var(--i) * 0.044s),
+      opacity 0.72s var(--ease-out) calc(0.18s + var(--i) * 0.044s);
+  }
 }
 
 .brand__tagline {
@@ -169,8 +199,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* Bouton menu (rouge) */
 .burger {
-  width: max(46px, calc(70 * var(--u)));
-  height: max(46px, calc(70 * var(--u)));
+  width: max(36px, calc(60 * var(--u)));
+  height: max(36px, calc(60 * var(--u)));
   flex: none;
   display: flex;
   flex-direction: column;
@@ -181,8 +211,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-radius: 2px;
   transition: background-color 0.2s ease, transform 0.16s var(--ease-out);
 }
-
-.home .burger { height: max(40px, calc(53 * var(--u))); }
 
 .burger span {
   display: block;
@@ -209,15 +237,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   position: relative;
   display: grid;
   place-items: center;
-  width: max(46px, calc(70 * var(--u)));
-  height: max(46px, calc(70 * var(--u)));
+  width: max(36px, calc(60 * var(--u)));
+  height: max(36px, calc(60 * var(--u)));
   border-radius: 2px;
-  background: var(--white);
-  box-shadow: inset 0 0 0 1.5px var(--rule);
-  transition: box-shadow 0.2s ease, transform 0.16s var(--ease-out);
+  background: var(--grey);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
-
-.home .account__btn { height: max(40px, calc(53 * var(--u))); }
 
 .account__btn:active { transform: scale(0.96); }
 
@@ -253,7 +278,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .account__btn:hover { box-shadow: inset 0 0 0 1.5px var(--black); }
+  .account__btn:hover {   
+    background: var( --muted); 
+    color: var( --white); 
+  }
 }
 
 .account__btn[aria-expanded="true"] { box-shadow: inset 0 0 0 1.5px var(--black); }
@@ -406,6 +434,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 .sec-title--plain::before { display: none; }
+
 
 .link-more {
   font-size: max(14px, calc(15 * var(--u)));
@@ -661,7 +690,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 .foot__cols > * {
-  padding-block: calc(4px + 26 * var(--u)) calc(4px + 22 * var(--u));
+  padding-block: calc(4px + 40 * var(--u));
   background:
     linear-gradient(var(--rule), var(--rule)) top left / 100% 4px no-repeat,
     linear-gradient(var(--rule), var(--rule)) bottom left / 100% 4px no-repeat;
@@ -672,7 +701,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   grid-template-columns: minmax(0, 720fr) minmax(0, 400fr);
   align-items: start;
   gap: 12px calc(20 * var(--u));
-  margin-top: calc(14 * var(--u));
+  margin-top: calc(34 * var(--u));
 }
 
 .news-form__input {
@@ -743,7 +772,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   gap: calc(16 * var(--u));
   min-height: calc(110 * var(--u));
   background-image:
-    url("../home/soldiers.png"),
+    url("../home/soldiers.webp"),
     linear-gradient(var(--rule), var(--rule)),
     linear-gradient(var(--rule), var(--rule));
   background-position: right bottom 4px, top left, bottom left;
@@ -757,11 +786,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   aspect-ratio: 65 / 73;
 }
 
-.sign__mark img { width: 100%; height: 100%; transition: transform 0.6s var(--ease-out); }
-
-@media (hover: hover) and (pointer: fine) {
-  .sign__mark:hover img { transform: rotate(60deg); }
-}
+.sign__mark img { width: 100%; height: 100%; }
 
 .sign__name {
   font-family: var(--font-display);
@@ -789,6 +814,160 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 @media (hover: hover) and (pointer: fine) {
   .sign__links a:hover { color: var(--red); }
+}
+
+/* ==========================================================================
+   Cartes « boite de jeu » (accueil, colonne laterale de Contact)
+   ========================================================================== */
+
+.boxes {
+  display: grid;
+  gap: calc(24 * var(--u));
+  list-style: none;
+}
+
+.box {
+  display: grid;
+  grid-template-columns: calc(150 * var(--u)) minmax(0, 1fr);
+  height: calc(184 * var(--u));
+  overflow: hidden;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+
+.box__cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.box__body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(6 * var(--u));
+  padding: calc(24 * var(--u)) calc(56 * var(--u)) calc(22 * var(--u)) calc(30 * var(--u));
+}
+
+.box__title {
+  font-family: var(--font-display);
+  font-size: max(17px, calc(22 * var(--u)));
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.box__desc {
+  font-size: max(14px, calc(13 * var(--u)));
+  line-height: 1.35;
+}
+
+.box__arrow {
+  position: absolute;
+  top: calc(12 * var(--u));
+  right: calc(12 * var(--u));
+  width: max(20px, calc(30 * var(--u)));
+  height: auto;
+  fill: var(--black);
+  transition: transform 0.3s var(--ease-out), fill 0.2s ease;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 7px;
+  border-radius: 2px;
+  background: #c8c8c8;
+  color: var(--white);
+  font-size: max(12px, calc(13 * var(--u)));
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.badge--red { background: var(--red); }
+
+.box:active { transform: scale(0.99); }
+
+@media (hover: hover) and (pointer: fine) {
+  .box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px -20px rgba(0, 0, 0, 0.35);
+  }
+  .box:hover .box__arrow {
+    fill: var(--red);
+    transform: translate(3px, -3px);
+  }
+}
+
+/* ==========================================================================
+   Bandeau de couvertures (accueil, page Les boîtes)
+   ========================================================================== */
+
+/* Pleine largeur ; chaque rangee garde les proportions 1920 x 624 de la
+   maquette (100cqw = largeur de body) */
+.prep__strip {
+  display: grid;
+  grid-template-columns: 491fr 454fr 471fr 504fr;
+  grid-auto-rows: calc(100cqw * 624 / 1920);
+  list-style: none;
+  overflow: hidden;
+}
+
+.prep__strip li { display: grid; min-width: 0; }
+
+.prep__box {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  /* Le bandeau rogne ce qui depasse : contour de focus a l'interieur */
+  outline-offset: -4px;
+}
+
+.prep__strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out), opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* Etiquette : hexagone rouge du logo avec la fleche, en bas a droite */
+.prep__sticker {
+  position: absolute;
+  right: max(8px, calc(24 * var(--u)));
+  bottom: max(8px, calc(22 * var(--u)));
+  display: grid;
+  place-items: center;
+  width: max(32px, calc(60 * var(--u)));
+  aspect-ratio: 139 / 156;
+  background: url("../logo-hex.svg") center / contain no-repeat;
+  transition: opacity 0.3s ease, transform 0.4s var(--ease-out);
+}
+
+.prep__arrow {
+  width: 34%;
+  height: auto;
+  fill: var(--white);
+}
+
+/* Au repos les couvertures sont grisees et a demi effacees ; celle survolee
+   retrouve ses couleurs et montre l'hexagone. Sans survol (tactile), elles
+   restent en couleur avec l'hexagone visible. */
+@media (hover: hover) and (pointer: fine) {
+  .prep__strip img { opacity: 0.5; filter: grayscale(1); }
+  .prep__sticker { opacity: 0; transform: translateY(8px); }
+
+  .prep__box:hover img,
+  .prep__box:focus-visible img {
+    opacity: 1;
+    filter: none;
+    transform: scale(1.03);
+  }
+
+  .prep__box:hover .prep__sticker,
+  .prep__box:focus-visible .prep__sticker {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ==========================================================================
@@ -919,7 +1098,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: color 0.2s ease;
 }
 
-.lang__btn[aria-pressed="true"] {
+.lang__btn[aria-current="true"] {
   color: var(--black);
   box-shadow: inset 0 -2px 0 var(--red);
 }
@@ -939,12 +1118,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 
 .js .reveal.is-in { opacity: 1; transform: none; }
-
-/* Changement de langue : fondu discret */
-[data-i18n],
-[data-i18n-html] { transition: opacity 0.18s ease; }
-.is-switching [data-i18n],
-.is-switching [data-i18n-html] { opacity: 0; }
 
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes fade-up { from { opacity: 0; transform: translateY(12px); } }
@@ -975,6 +1148,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
   .ruled { padding-top: 24px; }
 
+  .box {
+    grid-template-columns: 104px minmax(0, 1fr);
+    min-height: 140px;
+  }
+  .box__body { gap: 8px; padding: 14px 44px 14px 16px; }
+  .box__arrow { top: 12px; right: 12px; }
+
+  .prep__strip { grid-template-columns: 1fr 1fr; grid-auto-rows: auto; }
+  .prep__strip li { aspect-ratio: 3 / 4; }
+
   .foot { margin-top: 56px; padding-bottom: 32px; }
   .foot__cols { row-gap: 0; }
   .foot__cols > * { padding-block: 24px; }
@@ -982,7 +1165,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   /* Le filet du haut ferait doublon avec celui du bas du formulaire */
   .sign {
     min-height: 96px;
-    background-image: url("../home/soldiers.png"), linear-gradient(var(--rule), var(--rule));
+    background-image: url("../home/soldiers.webp"), linear-gradient(var(--rule), var(--rule));
     background-position: right bottom 4px, bottom left;
     background-size: auto 70%, 100% 4px;
   }

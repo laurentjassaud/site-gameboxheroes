@@ -1,12 +1,14 @@
 // Fichier genere par tools/gen_home.py : textes FR / EN de index.html.
 window.GBH_I18N = {
   "fr": {
-    "box1.badge": "Bêta publique",
-    "box1.desc": "Arnhem&nbsp;: Operation Market-Garden, septembre 1944, est un wargame de plateau pour deux joueurs, de niveau opérationnel, faisant à l’origine partie du quad Westwall.",
-    "box2.badge": "Alpha privée",
-    "box2.desc": "Menez une escouade dans une série de combats tactiques de 39-45, tout droit sortis d’Hollywood&nbsp;!",
-    "home.lead": "est un site personnel dans lequel je développe<br>l’adaptation de classiques du wargame<br>pour jouer en solo ou en direct<br>et à plusieurs",
+    "home.lead": "est un site personnel dans lequel je développe <br>l’adaptation de classiques du wargame <br>pour jouer en solo ou en direct <br>et à plusieurs",
     "home.latest": "Dernières boîtes",
+    "box1.title": "A Bridge Too Far&nbsp;: Arnhem",
+    "box1.badge": "Bêta publique",
+    "box1.desc": "Un jeu pour 2 joueurs de SPI Games publié en 1976 et designé par Jay A. Nelson pour la série West Wall",
+    "box2.title": "Ambush!",
+    "box2.badge": "Alpha privée",
+    "box2.desc": "Un jeu solitaire de Victory Games publié en 1983 et designé par John H. Butterfield et Eric Lee Smith",
     "work1.alt": "Carte de jeu",
     "work1.title": "Test public",
     "work1.text": "Le jeu <a href=\"actualites.html#arnhem-tests-publics\">Arnhem</a> publié en 1976 par SPI est prêt à être testé&nbsp;: ouverture de la bêta publique.",
@@ -27,17 +29,20 @@ window.GBH_I18N = {
     "home.more": "En voir plus",
     "home.specs": "Particularités des boîtes",
     "home.prep": "Les boîtes en préparation",
+    "prep.see": "Voir la boîte",
     "home.about": "<span class=\"sr-only\">GameBoxHeroes </span>est un site personnel et non commercial, développé en temps libre par passion des wargames et des jeux en solo",
-    "meta.title": "GameBoxHeroes — Les boîtes de jeux des classiques du wargame",
-    "meta.description": "GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs."
+    "meta.title": "Wargames classiques en ligne, en solo ou à deux — GameBoxHeroes",
+    "meta.description": "GameBoxHeroes adapte les classiques du wargame (Arnhem, Ambush!, Patton’s Best…) pour jouer en ligne, en solo ou à deux, avec un mode assisté qui vérifie les règles."
   },
   "en": {
-    "box1.badge": "Public beta",
-    "box1.desc": "Arnhem: Operation Market-Garden, September 1944, is a two-player Operational level board-wargame originally part of the Westwall quad.",
-    "box2.badge": "Private alpha",
-    "box2.desc": "Lead a squad through a series of WWII tactical engagements straight outta Hollywood!",
-    "home.lead": "is a personal site where I build<br>adaptations of classic wargames<br>to play solo, or live<br>with other players",
+    "home.lead": "is a personal site where I build <br>adaptations of classic wargames <br>to play solo, or live <br>with other players",
     "home.latest": "Latest boxes",
+    "box1.title": "A Bridge Too Far: Arnhem",
+    "box1.badge": "Public beta",
+    "box1.desc": "A two-player game from SPI Games, published in 1976 and designed by Jay A. Nelson for the West Wall series",
+    "box2.title": "Ambush!",
+    "box2.badge": "Private alpha",
+    "box2.desc": "A solitaire game from Victory Games, published in 1983 and designed by John H. Butterfield and Eric Lee Smith",
     "work1.alt": "Game map",
     "work1.title": "Public test",
     "work1.text": "The <a href=\"actualites.html#arnhem-tests-publics\">Arnhem</a> game published in 1976 by SPI is ready for testing: the public beta is open.",
@@ -58,8 +63,9 @@ window.GBH_I18N = {
     "home.more": "See more",
     "home.specs": "What makes the boxes special",
     "home.prep": "Boxes in the works",
+    "prep.see": "View the box",
     "home.about": "<span class=\"sr-only\">GameBoxHeroes </span>is a personal, non-commercial site, built in spare time out of a passion for wargames and solo games",
-    "meta.title": "GameBoxHeroes — The game boxes of classic wargames",
-    "meta.description": "GameBoxHeroes adapts classic wargames to play solo or live with others."
+    "meta.title": "Classic wargames online, solo or head-to-head — GameBoxHeroes",
+    "meta.description": "GameBoxHeroes adapts classic wargames (Arnhem, Ambush!, Patton’s Best…) for online play, solo or head-to-head, with an assisted mode that checks the rules."
   }
 };

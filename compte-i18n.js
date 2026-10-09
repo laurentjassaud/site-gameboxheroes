@@ -54,7 +54,7 @@ window.GBH_I18N = {
     "auth.create": "Créer mon compte",
     "auth.doneLabel": "Compte créé",
     "auth.go": "Continuer",
-    "meta.title": "GameBoxHeroes — Mon compte",
+    "meta.title": "Mon compte — GameBoxHeroes",
     "meta.description": "Connectez-vous ou créez votre compte GameBoxHeroes pour sauvegarder vos parties."
   },
   "en": {
@@ -111,7 +111,7 @@ window.GBH_I18N = {
     "auth.create": "Create my account",
     "auth.doneLabel": "Account created",
     "auth.go": "Continue",
-    "meta.title": "GameBoxHeroes — My account",
+    "meta.title": "My account — GameBoxHeroes",
     "meta.description": "Sign in or create your GameBoxHeroes account to save your games."
   }
 };

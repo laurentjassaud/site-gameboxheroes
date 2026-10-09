@@ -3,6 +3,22 @@
    et roadmap.css (filets). Grille : formulaire 1192 | colonne 579.
    ========================================================================== */
 
+/* Carte en fond du bandeau, sur un pseudo-element comme sur l'accueil ;
+   l'image est deja fondue a gauche, derriere le titre */
+.page-contact .top > .wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-contact .top > .wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("../contact/hero-map.webp") center / cover no-repeat;
+  pointer-events: none;
+}
+
 .ct-body { scroll-margin-top: 24px; }
 
 .ct-form-wrap { min-width: 0; max-width: 760px; }
@@ -148,7 +164,7 @@
 
 .ct-again { margin-top: 28px; }
 
-/* ---------- Colonne laterale : raccourcis + informations ---------- */
+/* ---------- Colonne laterale : dernieres boites (Contact), informations (Compte) ---------- */
 
 .ct-aside {
   display: flex;
@@ -156,47 +172,21 @@
   gap: max(22px, calc(32 * var(--u)));
 }
 
-.shortcuts {
-  display: grid;
-  gap: 8px;
-  list-style: none;
-}
+/* Titre de colonne, a la hauteur de celui du formulaire : sa marge complete
+   l'espacement de la colonne pour retrouver l'ecart de .ct-title */
+.ct-aside > .ct-title { margin-bottom: calc(4 * var(--u)); }
 
-.shortcut {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 18px;
+/* Cartes .box de style.css : sur le fond blanc de la page, elles reprennent
+   le creme et le lisere des encarts (l'accueil les pose en blanc sur creme) */
+.ct-aside .box {
   background: var(--cream);
   box-shadow: inset 0 0 0 1px var(--rule);
-  font-size: 17px;
-  font-weight: 600;
-  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
 }
-
-.shortcut__num {
-  font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 1;
-  font-weight: 800;
-  color: var(--red);
-}
-
-.shortcut img {
-  width: 16px;
-  height: 17px;
-  margin-left: auto;
-  transition: transform 0.3s var(--ease-out);
-}
-
-.shortcut:active { transform: scale(0.98); }
 
 @media (hover: hover) and (pointer: fine) {
-  .shortcut:hover {
-    transform: translateY(-2px);
-    box-shadow: inset 0 0 0 1px var(--rule), 0 12px 26px -18px rgba(0, 0, 0, 0.35);
+  .ct-aside .box:hover {
+    box-shadow: inset 0 0 0 1px var(--rule), 0 14px 30px -20px rgba(0, 0, 0, 0.35);
   }
-  .shortcut:hover img { transform: translate(3px, -3px); }
 }
 
 .info {
@@ -219,5 +209,9 @@
 /* ---------- Mobile ---------- */
 
 @media (max-width: 900px) {
+  /* Bandeau etroit : on decale le cadrage vers la partie claire de gauche
+     pour garder le titre et le sous-titre lisibles */
+  .page-contact .top > .wrap::before { background-position: 30% center; }
+
   .field-row { grid-template-columns: 1fr; }
 }

@@ -3,7 +3,7 @@
  * Traitement du formulaire de contact GameBoxHeroes.
  *
  * - Appel AJAX (en-tete Accept: application/json) : repond en JSON.
- * - Envoi classique sans JavaScript : redirige vers contact.html?status=...
+ * - Envoi classique sans JavaScript : redirige vers contact.html?status=... (en/contact.html en anglais)
  *
  * Reponse JSON : { ok: bool, error?: code, fields?: { champ: code } }
  * Les codes sont traduits cote navigateur (contact-i18n.js).
@@ -11,15 +11,25 @@
 
 declare(strict_types=1);
 
-$config = require __DIR__ . '/contact-config.php';
+// Les avertissements PHP ne doivent jamais se meler a la reponse JSON
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
 
 const SUBJECTS = ['general', 'module', 'bug', 'press'];
 
-$wantsJson = str_contains($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json');
+$wantsJson = strpos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false;
 $lang = ($_POST['lang'] ?? '') === 'en' ? 'en' : 'fr';
 
+// Toute erreur inattendue renvoie une reponse propre et laisse une trace dans le journal
+set_exception_handler(function (Throwable $e): void {
+    error_log('[contact] ' . get_class($e) . ' : ' . $e->getMessage() . ' (' . $e->getFile() . ':' . $e->getLine() . ')');
+    respond(false, 500, 'send_failed');
+});
+
+$config = require __DIR__ . '/contact-config.php';
+
 /** Termine la requete avec le bon format de reponse. */
-function respond(bool $ok, int $status, ?string $error = null, array $fields = []): never
+function respond(bool $ok, int $status, ?string $error = null, array $fields = []): void
 {
     global $wantsJson, $lang;
 
@@ -35,7 +45,8 @@ function respond(bool $ok, int $status, ?string $error = null, array $fields = [
     }
 
     $query = ['status' => $ok ? 'sent' : ($error ?? 'invalid'), 'lang' => $lang];
-    header('Location: contact.html?' . http_build_query($query) . '#form', true, 303);
+    // La page anglaise est dans en/
+    header('Location: ' . ($lang === 'en' ? 'en/' : '') . 'contact.html?' . http_build_query($query) . '#form', true, 303);
     exit;
 }
 

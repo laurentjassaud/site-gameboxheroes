@@ -3,14 +3,14 @@
 # contact-i18n.js (ecrit a la main) ; ceux de Compte et des Mentions legales
 # sont definis ici.
 # Usage : python tools/gen_static.py
-from layout import Page, topbar, intro, render, CREDIT
+from layout import Page, topbar, intro, render, credit, boxes, CREDIT
 from legal import LEGAL_FR, LEGAL_EN
 
 
-def top_block(p, title, sub):
+def top_block(p, title, sub, credit_html=CREDIT):
     return f'''{topbar()}
 {intro(p, title, sub)}
-    {CREDIT}'''
+    {credit_html}'''
 
 
 # ===========================================================================
@@ -21,7 +21,8 @@ def build_contact():
     p = Page()
     top = top_block(p, ('Contact', 'Contact'),
                     ('Parlons wargames&nbsp;:<br>une idée, une question, un jeu original à adapter',
-                     'Let’s talk wargames:<br>an idea, a question, a classic game to adapt'))
+                     'Let’s talk wargames:<br>an idea, a question, a classic game to adapt'),
+                    credit('Thunder at Cassino', 'The Avalon Hill Game Co'))
 
     body = '''  <div class="wrap ct-body cols split" id="form">
     <div class="ct-form-wrap">
@@ -50,7 +51,6 @@ def build_contact():
               <option value="general" data-i18n="subject.general">Question générale</option>
               <option value="module" data-i18n="subject.module">Proposer un module</option>
               <option value="bug" data-i18n="subject.bug">Signaler un bug</option>
-              <option value="press" data-i18n="subject.press">Presse &amp; partenariats</option>
             </select>
           </div>
           <p class="field__error" id="e-subject"></p>
@@ -94,36 +94,18 @@ def build_contact():
       </div>
     </div>
 
-    <aside class="ct-aside">
-      <!-- Raccourcis : pre-remplissent le sujet du formulaire -->
-      <ul class="shortcuts" data-i18n-attr="aria-label:ct.shortcuts" aria-label="Raccourcis">
-        <li><a class="shortcut" href="#form" data-subject="module"><span class="shortcut__num">01</span><span data-i18n="subject.module">Proposer un module</span><img src="assets/arrow.svg" alt="" width="30" height="31"></a></li>
-        <li><a class="shortcut" href="#form" data-subject="bug"><span class="shortcut__num">02</span><span data-i18n="subject.bug">Signaler un bug</span><img src="assets/arrow.svg" alt="" width="30" height="31"></a></li>
-        <li><a class="shortcut" href="#form" data-subject="press"><span class="shortcut__num">03</span><span data-i18n="subject.press">Presse &amp; partenariats</span><img src="assets/arrow.svg" alt="" width="30" height="31"></a></li>
-      </ul>
-      <div class="info">
-        <p class="info__label" data-i18n="info.delay.label">Délai de réponse</p>
-        <p class="info__text" data-i18n="info.delay.text">48 heures ouvrées en moyenne, souvent moins.</p>
-      </div>
-      <div class="info">
-        <p class="info__label" data-i18n="info.lang.label">Langues</p>
-        <p class="info__text" data-i18n="info.lang.text">Nous répondons en français et en anglais.</p>
-      </div>
-      <div class="info">
-        <p class="info__label" data-i18n="info.bug.label">Pour un bug</p>
-        <p class="info__text" data-i18n="info.bug.text">Précisez le module, le scénario et le tour concernés&nbsp;: nous retrouverons la partie plus vite.</p>
-      </div>
-      <div class="info">
-        <p class="info__label" data-i18n="info.privacy.label">Vos données</p>
-        <p class="info__text" data-i18n-html="info.privacy.text">Votre nom et votre e-mail servent uniquement à vous répondre. Ils ne sont ni stockés sur le site ni transmis à des tiers.</p>
-      </div>
+    <aside class="ct-aside" aria-labelledby="latest-title">
+        <h2 class="ct-title" id="latest-title" data-i18n-html="home.latest">Dernières boîtes</h2>
+        ''' + boxes(p) + '''
     </aside>
   </div>'''
 
     render(p, file='contact.html',
-           meta_title=('GameBoxHeroes — Contact', 'GameBoxHeroes — Contact'),
-           meta_desc=('Une question, une idée de module, un bug ? Écrivez à l’équipe GameBoxHeroes.',
-                      'A question, a module idea, a bug? Write to the GameBoxHeroes team.'),
+           meta_title=('Contact : proposer un wargame, signaler un bug — GameBoxHeroes',
+                       'Contact: suggest a wargame, report a bug — GameBoxHeroes'),
+           meta_desc=('Une question, une idée de wargame à adapter, un bug à signaler ? Écrivez à GameBoxHeroes : nous répondons sous 48 heures ouvrées.',
+                      'A question, a wargame you’d like to see adapted, a bug to report? Write to GameBoxHeroes: we reply within two business days.'),
+           page_type='ContactPage',
            top=top, body=body, css=['roadmap.css', 'contact.css'], scripts=['contact.js'],
            body_class='page-contact', generator='tools/gen_static.py', i18n_file='contact-i18n.js')
     return p
@@ -349,9 +331,10 @@ def build_account():
         K(key, fr, en)
 
     render(p, file='compte.html',
-           meta_title=('GameBoxHeroes — Mon compte', 'GameBoxHeroes — My account'),
+           meta_title=('Mon compte — GameBoxHeroes', 'My account — GameBoxHeroes'),
            meta_desc=('Connectez-vous ou créez votre compte GameBoxHeroes pour sauvegarder vos parties.',
                       'Sign in or create your GameBoxHeroes account to save your games.'),
+           noindex=True,
            top=top, body=body, css=['roadmap.css', 'contact.css', 'compte.css'], modules=['compte.js'],
            body_class='page-account', generator='tools/gen_static.py')
 
@@ -367,12 +350,10 @@ def build_legal():
                      'Publisher, hosting, player accounts,<br>personal data and cookies.'))
     p.k('legal.toc', 'Sur cette page', 'On this page')
 
-    body = f'''  <div class="wrap cols split legal-body">
-    <article class="legal legal--fr" lang="fr">
-{LEGAL_FR}
-    </article>
-    <article class="legal legal--en" lang="en">
-{LEGAL_EN}
+    def body(lang, text):
+        return f'''  <div class="wrap cols split legal-body">
+    <article class="legal legal--{lang}" lang="{lang}">
+{text}
     </article>
 
     <aside class="legal-toc">
@@ -384,10 +365,11 @@ def build_legal():
   </div>'''
 
     render(p, file='mentions-legales.html',
-           meta_title=('GameBoxHeroes — Mentions légales et confidentialité', 'GameBoxHeroes — Legal notice and privacy'),
-           meta_desc=('Mentions légales, politique de confidentialité et cookies du site GameBoxHeroes.',
-                      'Legal notice, privacy policy and cookies of the GameBoxHeroes website.'),
-           top=top, body=body, css=['roadmap.css', 'contact.css', 'pages.css'], scripts=['legal.js'],
+           meta_title=('Mentions légales et confidentialité — GameBoxHeroes', 'Legal notice and privacy — GameBoxHeroes'),
+           meta_desc=('Mentions légales du site GameBoxHeroes : éditeur, hébergement, comptes joueurs, politique de confidentialité, données personnelles et cookies.',
+                      'Legal notice for the GameBoxHeroes website: publisher, hosting, player accounts, privacy policy, personal data and cookies.'),
+           top=top, body=body('fr', LEGAL_FR), body_en=body('en', LEGAL_EN),
+           css=['roadmap.css', 'contact.css', 'pages.css'], scripts=['legal.js'],
            body_class='page-legal', generator='tools/gen_static.py')
 
 

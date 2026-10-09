@@ -7,16 +7,41 @@
 
 .wordmark {
   font-family: var(--font-display);
-  font-size: max(44px, calc(103 * var(--u)));
+  font-size: max(70px, calc(120 * var(--u)));
   line-height: 0.95;
   font-weight: 800;
   letter-spacing: -0.025em;
   white-space: nowrap;
+  /* Contour creme pour detacher le mot de la carte en fond : le trait est
+     peint sous le remplissage, seule sa moitie exterieure est visible */
+  -webkit-text-stroke: max(2px, calc(4 * var(--u))) var(--cream);
+  paint-order: stroke fill;
+}
+
+.wordmark.plus {
+  font-size: max(70px, calc(180 * var(--u))); 
 }
 
 .wordmark span { color: var(--red); }
 
 /* ---------- Haut de page ---------- */
+
+/* Carte Normandy '44 en fond du bandeau. Posee sur un pseudo-element pour
+   pouvoir la recadrer sur mobile sans toucher au contenu ; l'image est deja
+   fondue sur ses bords gauche et droit. */
+.home .top > .wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.home .top > .wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("../home/hero-map.webp") center bottom / cover no-repeat;
+  pointer-events: none;
+}
 
 .hero {
   align-items: center;
@@ -43,83 +68,10 @@
   animation: fade-up 0.6s var(--ease-out) 0.2s both;
 }
 
-.boxes {
-  display: grid;
-  gap: calc(24 * var(--u));
-  list-style: none;
-}
-
+/* Cartes .box : style.css (partagees avec la page Contact) */
 .boxes li { animation: slide-in 0.7s var(--ease-out) both; }
 .boxes li:nth-child(1) { animation-delay: 0.28s; }
 .boxes li:nth-child(2) { animation-delay: 0.36s; }
-
-.box {
-  display: grid;
-  grid-template-columns: calc(150 * var(--u)) minmax(0, 1fr);
-  min-height: calc(184 * var(--u));
-  background: var(--white);
-  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
-}
-
-.box__cover {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.box__body {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: calc(12 * var(--u));
-  padding: calc(24 * var(--u)) calc(56 * var(--u)) calc(22 * var(--u)) calc(30 * var(--u));
-}
-
-.box__title {
-  font-family: var(--font-display);
-  font-size: max(17px, calc(22 * var(--u)));
-  line-height: 1.15;
-  font-weight: 500;
-}
-
-.box__desc {
-  margin-top: auto;
-  font-size: max(14px, calc(13 * var(--u)));
-  line-height: 1.35;
-}
-
-.box__arrow {
-  position: absolute;
-  top: calc(12 * var(--u));
-  right: calc(12 * var(--u));
-  width: max(20px, calc(30 * var(--u)));
-  height: auto;
-  transition: transform 0.3s var(--ease-out);
-}
-
-.badge {
-  display: inline-block;
-  padding: 3px 7px;
-  border-radius: 2px;
-  background: #c8c8c8;
-  color: var(--white);
-  font-size: max(12px, calc(13 * var(--u)));
-  line-height: 1.3;
-  font-weight: 700;
-}
-
-.badge--red { background: var(--red); }
-
-.box:active { transform: scale(0.99); }
-
-@media (hover: hover) and (pointer: fine) {
-  .box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px -20px rgba(0, 0, 0, 0.35);
-  }
-  .box:hover .box__arrow { transform: translate(3px, -3px); }
-}
 
 .top .credit { margin-top: calc(18 * var(--u)); }
 
@@ -179,41 +131,20 @@
 .prep { margin-top: calc(30 * var(--u)); }
 
 .prep__title {
-  padding-bottom: calc(26 * var(--u));
+  padding-bottom: calc(36 * var(--u));
   font-family: var(--font-display);
-  font-size: max(28px, calc(50 * var(--u)));
+  font-size: max(36px, calc(70 * var(--u)));
   line-height: 1;
   font-weight: 700;
   color: var(--red);
 }
 
-/* Bandeau pleine largeur (plafonne comme le reste de la page) */
-.prep__strip {
-  display: grid;
-  grid-template-columns: 491fr 454fr 471fr 504fr;
-  aspect-ratio: 1920 / 624;
-  margin-inline: auto;
-  list-style: none;
-  overflow: hidden;
-}
-
-.prep__strip li { min-width: 0; overflow: hidden; }
-
-.prep__strip img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .prep__strip li:hover img { transform: scale(1.03); }
-}
+/* Bandeau de couvertures .prep__strip : style.css (partage avec Les boîtes) */
 
 /* ---------- Presentation ---------- */
 
 .about {
-  margin-top: calc(56 * var(--u));
+  margin: calc(210 * var(--u)) auto;
   text-align: center;
 }
 
@@ -231,26 +162,28 @@
 /* ---------- Tablette / mobile ---------- */
 
 @media (max-width: 900px) {
+  /* Colonnes empilees : le bandeau est haut, un cover agrandirait trop la
+     carte. On la limite au haut de page (logo, mot-symbole, texte) et on la
+     fond vers le bas avant les boites. */
+  .home .top > .wrap::before {
+    bottom: auto;
+    height: min(100%, max(420px, 125vw));
+    background-position: 45% 70%;
+    -webkit-mask-image: linear-gradient(#000 60%, transparent);
+    mask-image: linear-gradient(#000 60%, transparent);
+  }
+
   .hero { padding-top: 40px; }
   .hero__text { margin-top: 16px; }
   .hero__text br { display: none; }
   .prep .cols > [aria-hidden] { display: none; }
   .top .credit { margin-top: 24px; }
 
-  .box {
-    grid-template-columns: 104px minmax(0, 1fr);
-    min-height: 140px;
-  }
-  .box__body { gap: 8px; padding: 14px 44px 14px 16px; }
-  .box__arrow { top: 12px; right: 12px; }
-
   .home-sec { margin-top: 32px; }
   .work__list { grid-template-columns: 1fr; margin-top: 20px; }
   .work__title { margin-top: 10px; }
 
   .prep { margin-top: 40px; }
-  .prep__strip { grid-template-columns: 1fr 1fr; aspect-ratio: auto; }
-  .prep__strip li { aspect-ratio: 3 / 4; }
 
   .about { margin-top: 40px; }
   .about__text { max-width: none; }

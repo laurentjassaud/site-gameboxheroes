@@ -1,37 +1,8 @@
 # Genere index.html + index-i18n.js (accueil, maquette Figma node 127:127).
 # Usage : python tools/gen_home.py
-from layout import Page, topbar, render, CREDIT
+from layout import Page, topbar, render, boxes, covers, COVERS, CREDIT
 
 p = Page()
-
-# ---------- Dernieres boites ----------
-BOXES = [
-    ('assets/cover-arnhem.jpg', 'Arnhem: Operation Market-Garden', 'A Bridge Too Far: Arnhem (1976)',
-     'badge--red', ('Bêta publique', 'Public beta'),
-     ('Arnhem&nbsp;: Operation Market-Garden, septembre 1944, est un wargame de plateau pour deux joueurs, de niveau opérationnel, faisant à l’origine partie du quad Westwall.',
-      'Arnhem: Operation Market-Garden, September 1944, is a two-player Operational level board-wargame originally part of the Westwall quad.'),
-     'actualites.html#arnhem-tests-publics'),
-    ('assets/cover-ambush.jpg', 'Ambush!', 'Ambush! (1983)',
-     '', ('Alpha privée', 'Private alpha'),
-     ('Menez une escouade dans une série de combats tactiques de 39-45, tout droit sortis d’Hollywood&nbsp;!',
-      'Lead a squad through a series of WWII tactical engagements straight outta Hollywood!'),
-     'actualites.html#ambush-missions'),
-]
-
-boxes = []
-for i, (img, alt, title, badge_cls, badge, desc, href) in enumerate(BOXES, 1):
-    cls = f'badge {badge_cls}'.strip()
-    boxes.append(f'''          <li>
-            <a class="box" href="{href}">
-              <img class="box__cover" src="{img}" alt="{alt}" width="150" height="184">
-              <div class="box__body">
-                <h3 class="box__title">{title}</h3>
-                {p.t(f'box{i}.badge', *badge, tag='span', cls=cls)}
-                {p.t(f'box{i}.desc', *desc, cls='box__desc')}
-                <img class="box__arrow" src="assets/arrow.svg" alt="" width="30" height="31">
-              </div>
-            </a>
-          </li>''')
 
 top = f'''{topbar(home=True)}
 
@@ -39,27 +10,27 @@ top = f'''{topbar(home=True)}
       <div class="hero__lead">
         <h1 class="wordmark">Game<span>Box</span>Heroes</h1>
         {p.t('home.lead',
-             'est un site personnel dans lequel je développe<br>l’adaptation de classiques du wargame<br>pour jouer en solo ou en direct<br>et à plusieurs',
-             'is a personal site where I build<br>adaptations of classic wargames<br>to play solo, or live<br>with other players',
+             # Espace avant chaque <br> : sur mobile home.css masque les <br>,
+             # sans elle les mots se colleraient
+             'est un site personnel dans lequel je développe <br>l’adaptation de classiques du wargame <br>pour jouer en solo ou en direct <br>et à plusieurs',
+             'is a personal site where I build <br>adaptations of classic wargames <br>to play solo, or live <br>with other players',
              cls='hero__text')}
       </div>
       <section class="latest" id="modules" aria-labelledby="latest-title">
         {p.t('home.latest', 'Dernières boîtes', 'Latest boxes', tag='h2', cls='latest__title', attrs='id="latest-title"')}
-        <ul class="boxes">
-{chr(10).join(boxes)}
-        </ul>
+        {boxes(p)}
       </section>
     </div>
     {CREDIT}'''
 
 # ---------- Travail en cours ----------
 WORK = [
-    ('assets/home/work-1.jpg', ('Carte de jeu', 'Game map'), ('Test public', 'Public test'),
+    ('assets/home/work-1.webp', ('Carte de jeu', 'Game map'), ('Test public', 'Public test'),
      ('Le jeu <a href="actualites.html#arnhem-tests-publics">Arnhem</a> publié en 1976 par SPI est prêt à être testé&nbsp;: ouverture de la bêta publique.',
       'The <a href="actualites.html#arnhem-tests-publics">Arnhem</a> game published in 1976 by SPI is ready for testing: the public beta is open.')),
-    ('assets/home/work-2.jpg', ('Pions sur la carte', 'Counters on the map'), ('Sur la table', 'On the table'),
+    ('assets/home/work-2.webp', ('Pions sur la carte', 'Counters on the map'), ('Sur la table', 'On the table'),
      ('Enemy Action: Kharkov', 'Enemy Action: Kharkov')),
-    ('assets/home/work-3.jpg', ('Partie en cours sur une carte', 'Game in progress on a map'), ('Mise en ligne', 'Going live'),
+    ('assets/home/work-3.webp', ('Partie en cours sur une carte', 'Game in progress on a map'), ('Mise en ligne', 'Going live'),
      ('Accès public du site GameBoxHeroes. L’aventure commence&nbsp;!', 'The GameBoxHeroes site is now public. The adventure begins!')),
 ]
 
@@ -95,15 +66,6 @@ for i, (title, paras) in enumerate(SPECS, 1):
 {body}
           </div>''')
 
-# ---------- Boites en preparation ----------
-PREP = [
-    ('assets/home/prep-arnhem.jpg', 'Arnhem: Operation Market-Garden'),
-    ('assets/home/prep-ambush.jpg', 'Ambush!'),
-    ('assets/home/prep-pattons-best.jpg', 'Patton’s Best'),
-    ('assets/home/prep-carrier-battle.jpg', 'Carrier Battle: South Pacific'),
-]
-prep = '\n'.join(f'      <li><img src="{src}" alt="{alt}" loading="lazy"></li>' for src, alt in PREP)
-
 body = f'''  <div class="wrap cols home-sec">
     <section class="work ruled" aria-labelledby="work-title">
       <div class="sec-head">
@@ -127,9 +89,7 @@ body = f'''  <div class="wrap cols home-sec">
       </div>
       <div class="ruled" aria-hidden="true"></div>
     </div>
-    <ul class="prep__strip">
-{prep}
-    </ul>
+{covers(p, COVERS[:4])}
   </section>
 
   <section class="about wrap reveal">
@@ -141,8 +101,8 @@ body = f'''  <div class="wrap cols home-sec">
   </section>'''
 
 render(p, file='index.html',
-       meta_title=('GameBoxHeroes — Les boîtes de jeux des classiques du wargame',
-                   'GameBoxHeroes — The game boxes of classic wargames'),
-       meta_desc=('GameBoxHeroes adapte les classiques du wargame pour jouer en solo ou en direct à plusieurs.',
-                  'GameBoxHeroes adapts classic wargames to play solo or live with others.'),
+       meta_title=('Wargames classiques en ligne, en solo ou à deux — GameBoxHeroes',
+                   'Classic wargames online, solo or head-to-head — GameBoxHeroes'),
+       meta_desc=('GameBoxHeroes adapte les classiques du wargame (Arnhem, Ambush!, Patton’s Best…) pour jouer en ligne, en solo ou à deux, avec un mode assisté qui vérifie les règles.',
+                  'GameBoxHeroes adapts classic wargames (Arnhem, Ambush!, Patton’s Best…) for online play, solo or head-to-head, with an assisted mode that checks the rules.'),
        top=top, body=body, css=['home.css'], body_class='home', generator='tools/gen_home.py')
